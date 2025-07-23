@@ -1,1 +1,95 @@
-<!DOCTYPE html><html><head><title>Resize Image</title></head><body><h1>Resize Image Tool</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resize Image - Photo Compressor Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    main {
+      text-align: center;
+      padding: 30px;
+    }
+    input, button, select {
+      margin: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    canvas {
+      max-width: 100%;
+      margin-top: 20px;
+      border: 1px solid #ddd;
+    }
+    #output a {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 15px;
+      background: #4A90E2;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Resize Image</h1>
+    <p>Change width and height of your image easily</p>
+  </header>
+
+  <main>
+    <input type="file" id="imageInput" accept="image/*" />
+    <br />
+    <input type="number" id="width" placeholder="Width (px)" />
+    <input type="number" id="height" placeholder="Height (px)" />
+    <br />
+    <button onclick="resizeImage()">Resize</button>
+
+    <div id="output"></div>
+  </main>
+
+  <script>
+    function resizeImage() {
+      const fileInput = document.getElementById('imageInput');
+      const width = parseInt(document.getElementById('width').value);
+      const height = parseInt(document.getElementById('height').value);
+      const output = document.getElementById('output');
+      output.innerHTML = "";
+
+      if (!fileInput.files.length) {
+        alert("Please select an image");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function (e) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          canvas.width = width || img.width;
+          canvas.height = height || img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = "resized_" + file.name;
+            link.textContent = "Download Resized Image";
+            output.appendChild(canvas);
+            output.appendChild(link);
+          }, file.type);
+        };
+        img.src = e.target.result;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
