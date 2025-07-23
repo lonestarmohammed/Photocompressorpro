@@ -1,1 +1,60 @@
-<!DOCTYPE html><html><head><title>PDF to Word</title></head><body><h1>PDF to Word Tool</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PDF to Word - Photo Compressor Pro</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    main {
+      text-align: center;
+      padding: 30px;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .status {
+      margin-top: 20px;
+      font-size: 16px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PDF to Word</h1>
+    <p>Convert your PDF documents into editable Word format</p>
+  </header>
+
+  <main>
+    <input type="file" id="pdfInput" accept=".pdf" />
+    <br />
+    <button onclick="convertPDF()">Convert to Word</button>
+
+    <div id="status" class="status"></div>
+  </main>
+
+  <script>
+    function convertPDF() {
+      const file = document.getElementById('pdfInput').files[0];
+      const status = document.getElementById('status');
+
+      if (!file) {
+        alert("Please upload a PDF file");
+        return;
+      }
+
+      status.textContent = "Uploading and converting... Please wait.";
+
+      // Simulated delay – replace this with your real API integration
+      setTimeout(() => {
+        status.innerHTML = `✅ Conversion complete! <br><a href="#" download="converted.docx">Download Word File</a>`;
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
