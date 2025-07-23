@@ -6,54 +6,127 @@
   <title>PDF to Word - Photo Compressor Pro</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    main {
+    body {
+      font-family: Arial, sans-serif;
       text-align: center;
+      background-color: #f9f9f9;
       padding: 30px;
     }
-    input, button {
-      margin: 10px;
-      padding: 10px;
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .drop-zone {
+      border: 2px dashed #4A90E2;
+      border-radius: 10px;
+      padding: 40px;
+      background: #f0f8ff;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.3s;
+    }
+    .drop-zone:hover {
+      background: #e6f2ff;
+    }
+    #fileInput {
+      display: none;
+    }
+    .btn {
+      margin-top: 20px;
+      padding: 12px 24px;
+      background-color: #4A90E2;
+      color: white;
       font-size: 16px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
     .status {
       margin-top: 20px;
       font-size: 16px;
       color: green;
     }
+    .spinner {
+      margin-top: 20px;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #4A90E2;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      display: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    a.download-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #4A90E2;
+      text-decoration: none;
+      border: 2px solid #4A90E2;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
-  <header>
-    <h1>PDF to Word</h1>
-    <p>Convert your PDF documents into editable Word format</p>
-  </header>
+  <div class="container">
+    <h1>PDF to Word Converter</h1>
+    <p>Select your PDF file and convert it to a Word document.</p>
 
-  <main>
-    <input type="file" id="pdfInput" accept=".pdf" />
-    <br />
-    <button onclick="convertPDF()">Convert to Word</button>
+    <label class="drop-zone" for="fileInput">
+      Click or drag PDF file here
+    </label>
+    <input type="file" id="fileInput" accept=".pdf" />
 
-    <div id="status" class="status"></div>
-  </main>
+    <button class="btn" onclick="convertPDF()">Convert to Word</button>
+
+    <div class="spinner" id="spinner"></div>
+    <div class="status" id="status"></div>
+    <div id="downloadContainer"></div>
+  </div>
 
   <script>
     function convertPDF() {
-      const file = document.getElementById('pdfInput').files[0];
+      const fileInput = document.getElementById('fileInput');
+      const spinner = document.getElementById('spinner');
       const status = document.getElementById('status');
+      const downloadContainer = document.getElementById('downloadContainer');
 
+      const file = fileInput.files[0];
       if (!file) {
-        alert("Please upload a PDF file");
+        alert("Please select a PDF file first.");
         return;
       }
 
-      status.textContent = "Uploading and converting... Please wait.";
+      spinner.style.display = "block";
+      status.textContent = "Converting... Please wait.";
+      downloadContainer.innerHTML = "";
 
-      // Simulated delay – replace this with your real API integration
       setTimeout(() => {
-        status.innerHTML = `✅ Conversion complete! <br><a href="#" download="converted.docx">Download Word File</a>`;
-      }, 3000);
+        spinner.style.display = "none";
+        status.textContent = "✅ Conversion complete!";
+        downloadContainer.innerHTML = `
+          <a href="#" download="converted.docx" class="download-link">Download Word File</a>
+        `;
+      }, 3000); // Simulated conversion delay
     }
   </script>
 </body>
