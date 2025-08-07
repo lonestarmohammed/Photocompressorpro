@@ -2,114 +2,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PhotoCompressorPro - Compress Images Online</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhotoCompressorPro</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f6f9;
-      color: #333;
-    }
-    header {
-      background: #007BFF;
-      color: white;
-      padding: 20px 0;
-      text-align: center;
-    }
-    h1 {
-      margin: 0;
-      font-size: 2rem;
-    }
-    main {
-      max-width: 700px;
-      margin: 40px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.05);
-    }
-    input[type="file"] {
-      margin-bottom: 20px;
-      display: block;
-    }
-    #output {
-      margin-top: 20px;
-    }
-    button {
-      background-color: #007BFF;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #777;
-      font-size: 14px;
-    }
+    body { font-family: Arial, sans-serif; margin:0; background:#f4f6f9; color:#333; }
+    header { background:#007BFF; color:#fff; padding:20px; text-align:center; }
+    main { max-width:600px; margin:40px auto; background:#fff; border-radius:8px; padding:30px; box-shadow:0 0 16px rgba(0,0,0,0.1); }
+    input, button { width:100%; margin:12px 0; padding:12px; border-radius:6px; border:1px solid #ccc; }
+    button { background:#28a745; color:#fff; border:none; cursor:pointer; }
+    button:hover { background:#218838; }
+    #output { margin-top:20px; text-align:center; }
+    #output img { max-width:200px; display:block; margin:auto; border:1px solid #ddd; padding:5px; border-radius:4px; }
+    #output a { display:inline-block; margin-top:10px; padding:8px 16px; background:#007BFF; color:#fff; text-decoration:none; border-radius:4px; }
+    footer { text-align:center; font-size:13px; color:#666; padding:20px 0; }
   </style>
 </head>
 <body>
   <header>
     <h1>PhotoCompressorPro</h1>
-    <p>Compress your images instantly with a single click</p>
+    <p>Compress your images instantly with no quality loss</p>
   </header>
-
   <main>
     <input type="file" id="fileInput" accept="image/*">
+    <label for="fileInput">Choose or drag an image</label>
+    <input type="range" id="qualitySlider" min="10" max="90" value="70">
+    <p>Quality: <span id="qualityValue">70</span>%</p>
+    <button id="compressBtn">Compress & Download</button>
     <div id="output"></div>
   </main>
-
-  <footer>
-    &copy; 2025 PhotoCompressorPro.com - Built by Mac
-  </footer>
-
+  <footer>&copy; 2025 PhotoCompressorPro — Built by Mac</footer>
   <script>
-    function compressAndDownload(file) {
+    const qualitySlider = document.getElementById('qualitySlider');
+    const qualityValue = document.getElementById('qualityValue');
+    const compressBtn = document.getElementById('compressBtn');
+    const fileInput = document.getElementById('fileInput');
+    const output = document.getElementById('output');
+
+    qualitySlider.oninput = () => qualityValue.textContent = qualitySlider.value;
+
+    compressBtn.onclick = () => {
+      const file = fileInput.files[0];
+      if (!file) return alert("Please select an image");
       const reader = new FileReader();
-      reader.onload = function (event) {
+      reader.onload = (e) => {
         const img = new Image();
-        img.onload = function () {
+        img.onload = () => {
           const canvas = document.createElement('canvas');
-          canvas.width = img.width;
-          canvas.height = img.height;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0);
-
-          canvas.toBlob(function (blob) {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'compressed_' + file.name;
-            link.textContent = 'Download Compressed Image';
-            link.style.display = 'inline-block';
-            link.style.marginTop = '20px';
-            link.style.fontWeight = 'bold';
-
-            const output = document.getElementById('output');
-            output.innerHTML = '';
-            output.appendChild(link);
-          }, 'image/jpeg', 0.6); // Adjust compression quality here (0.0 to 1.0)
+          canvas.width = img.width; canvas.height = img.height;
+          canvas.getContext('2d').drawImage(img, 0, 0);
+          canvas.toBlob(blob => {
+            const url = URL.createObjectURL(blob);
+            output.innerHTML = `<img src="${url}" alt="Compressed Image"><br>`;
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'compressed-' + file.name;
+            a.textContent = 'Download Image';
+            output.appendChild(a);
+          }, 'image/jpeg', qualitySlider.value/100);
         };
-        img.src = event.target.result;
+        img.src = e.target.result;
       };
       reader.readAsDataURL(file);
-    }
-
-    document.getElementById('fileInput').addEventListener('change', function (e) {
-      const file = e.target.files[0];
-      if (file) {
-        compressAndDownload(file);
-      }
-    });
+    };
   </script>
 </body>
 </html>
