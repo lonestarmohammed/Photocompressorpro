@@ -1,34 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PhotoCompressor</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PhotoCompressorPro - Compress Images Online</title>
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: #007BFF;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+    main {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.05);
+    }
+    input[type="file"] {
+      margin-bottom: 20px;
+      display: block;
+    }
+    #output {
+      margin-top: 20px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
 </head>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
 <body>
   <header>
-    <h1>PhotoCompressor</h1>
-    <p>Compress your images instantly and beautifully</p>
+    <h1>PhotoCompressorPro</h1>
+    <p>Compress your images instantly with a single click</p>
   </header>
 
   <main>
-    <div class="upload-container">
-      <input type="file" id="fileInput" multiple accept="image/*" />
-      <label for="fileInput" class="upload-label">📁 Choose Images</label>
-      <input type="range" id="qualitySlider" min="10" max="90" value="70" />
-      <span>Compression Quality: <strong id="qualityValue">70</strong>%</span>
-      <button id="compressBtn">Compress Images</button>
-    </div>
+    <input type="file" id="fileInput" accept="image/*">
     <div id="output"></div>
   </main>
 
   <footer>
-    <p>&copy; 2025 PhotoCompressor by Mac</p>
+    &copy; 2025 PhotoCompressorPro.com - Built by Mac
   </footer>
 
-  <script src="scripts/compressor.js"></script>
+  <script>
+    function compressAndDownload(file) {
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const img = new Image();
+        img.onload = function () {
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+
+          canvas.toBlob(function (blob) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'compressed_' + file.name;
+            link.textContent = 'Download Compressed Image';
+            link.style.display = 'inline-block';
+            link.style.marginTop = '20px';
+            link.style.fontWeight = 'bold';
+
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+            output.appendChild(link);
+          }, 'image/jpeg', 0.6); // Adjust compression quality here (0.0 to 1.0)
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    document.getElementById('fileInput').addEventListener('change', function (e) {
+      const file = e.target.files[0];
+      if (file) {
+        compressAndDownload(file);
+      }
+    });
+  </script>
 </body>
 </html>
