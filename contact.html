@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact - PhotoCompressorPro</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; line-height: 1.6; }
+    h1 { color: #4A90E2; }
+    form { margin-top: 20px; }
+    label { display: block; margin-top: 10px; }
+    input, textarea { width: 100%; padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; }
+    button { margin-top: 15px; padding: 10px 20px; background-color: #4A90E2; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    footer { text-align: center; margin-top: 40px; font-size: 14px; color: #777; }
+  </style>
+</head>
+<body>
+  <h1>Contact Us</h1>
+  <p>If you have any questions or feedback, feel free to reach out!</p>
+  <form action="mailto:your-email@example.com" method="POST" enctype="text/plain">
+    <label for="name">Your Name:</label>
+    <input type="text" name="name" required>
+
+    <label for="email">Your Email:</label>
+    <input type="email" name="email" required>
+
+    <label for="message">Message:</label>
+    <textarea name="message" rows="6" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <footer>
+    &copy; 2025 PhotoCompressorPro.com
+  </footer>
+</body>
+</html>
