@@ -1,0 +1,47 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f4f4f4;
+  color: #333;
+}
+header {
+  background: #4A90E2;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+.upload-container {
+  max-width: 600px;
+  margin: 30px auto;
+  text-align: center;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.upload-label {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #4A90E2;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#compressBtn {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background: #2ECC71;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#output img {
+  max-width: 100px;
+  margin: 10px;
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+}
