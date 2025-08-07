@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PhotoCompressor</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <header>
+    <h1>PhotoCompressor</h1>
+    <p>Compress your images instantly and beautifully</p>
+  </header>
+
+  <main>
+    <div class="upload-container">
+      <input type="file" id="fileInput" multiple accept="image/*" />
+      <label for="fileInput" class="upload-label">📁 Choose Images</label>
+      <input type="range" id="qualitySlider" min="10" max="90" value="70" />
+      <span>Compression Quality: <strong id="qualityValue">70</strong>%</span>
+      <button id="compressBtn">Compress Images</button>
+    </div>
+    <div id="output"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 PhotoCompressor by Mac</p>
+  </footer>
+
+  <script src="scripts/compressor.js"></script>
+</body>
+</html>
