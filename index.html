@@ -18,6 +18,15 @@
     footer { text-align:center; font-size:13px; color:#666; padding:20px 0; }
   </style>
 </head>
+  <script>
+  const toggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.site-nav');
+  toggle.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    nav.classList.toggle('open');
+  });
+</script>
 <body>
   <header>
   <header class="site-header">
