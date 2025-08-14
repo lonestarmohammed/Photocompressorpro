@@ -1,106 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9087913537288549"
-     crossorigin="anonymous"></script>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Photo Compressor Pro – Compress Images Online</title>
+  <meta name="description" content="Free online image compressor. Reduce JPG/PNG size without losing visible quality. Fast, secure, and runs in your browser.">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <!-- Keep your AdSense verification script in <head> (as you already added). -->
+
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f4f6f9; color:#333; }
-    header { background:#007BFF; color:#fff; padding:20px; text-align:center; }
-    main { max-width:600px; margin:40px auto; background:#fff; border-radius:8px; padding:30px; box-shadow:0 0 16px rgba(0,0,0,0.1); }
-    input, button { width:100%; margin:12px 0; padding:12px; border-radius:6px; border:1px solid #ccc; }
-    button { background:#28a745; color:#fff; border:none; cursor:pointer; }
-    button:hover { background:#218838; }
-    #output { margin-top:20px; text-align:center; }
-    #output img { max-width:200px; display:block; margin:auto; border:1px solid #ddd; padding:5px; border-radius:4px; }
-    #output a { display:inline-block; margin-top:10px; padding:8px 16px; background:#007BFF; color:#fff; text-decoration:none; border-radius:4px; }
-    footer { text-align:center; font-size:13px; color:#666; padding:20px 0; }
+    :root{
+      --brand:#1f6fff;
+      --ink:#0f172a;
+      --muted:#6b7280;
+      --bg:#f6f8fb;
+      --card:#ffffff;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    /* Header */
+    header.site-header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(180%) blur(8px);
+      background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.85));
+      border-bottom:1px solid rgba(15,23,42,.06);
+    }
+    .nav-wrap{max-width:1000px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+    .brand{text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.2px}
+    .brand .accent{color:var(--brand)}
+    nav a{color:var(--ink);text-decoration:none;margin-left:16px;font-weight:600}
+    nav a:hover{color:var(--brand)}
+    @media (max-width:680px){
+      .nav-wrap{flex-direction:column;gap:8px}
+      nav a{margin:0 8px}
+    }
+
+    /* Main card */
+    main{max-width:900px;margin:34px auto;padding:0 16px}
+    .card{
+      background:var(--card);border-radius:16px;
+      box-shadow:0 8px 28px rgba(0,0,0,.06);
+      padding:24px;
+    }
+    .hero{
+      text-align:center;margin-bottom:14px
+    }
+    .hero h1{margin:0 0 6px;font-size:1.7rem}
+    .hero p{margin:0;color:var(--muted)}
+
+    /* Uploader */
+    .uploader{
+      border:2px dashed rgba(15,23,42,.12);
+      border-radius:14px;
+      padding:22px;
+      background:#fafbff;
+      display:flex;flex-direction:column;align-items:center;gap:12px;
+      text-align:center;
+    }
+    .uploader input[type=file]{display:none}
+    .btn{
+      appearance:none;border:0;border-radius:12px;cursor:pointer;
+      background:linear-gradient(90deg, var(--brand), #00c2ff);
+      color:#fff;padding:12px 18px;font-weight:700;
+      box-shadow:0 10px 22px rgba(31,111,255,.22);
+    }
+    .btn.secondary{background:#eef2ff;color:#1f3a8a;box-shadow:none}
+    .hint{font-size:.92rem;color:var(--muted)}
+    .dragging{background:#eef4ff;border-color:var(--brand)}
+    .controls{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .range{width:240px}
+    .kvs{font-weight:700;color:var(--brand)}
+
+    /* Output */
+    .output{
+      margin-top:18px;display:grid;gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    }
+    .thumb{
+      background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:12px;text-align:center
+    }
+    .thumb img{max-width:100%;border-radius:8px;border:1px solid rgba(15,23,42,.06)}
+    .meta{font-size:.85rem;color:var(--muted);margin:8px 0}
+    .thumb .btn{width:100%}
+
+    footer{margin:30px 0 24px;text-align:center;color:var(--muted);font-size:.9rem}
   </style>
 </head>
-  <script>
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.site-nav');
-  toggle.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    nav.classList.toggle('open');
-  });
-</script>
 <body>
-  <header>
+  <!-- Header -->
   <header class="site-header">
-  <div class="nav-wrap">
-    <a class="brand" href="index.html">
-      <!-- Optional logo image -->
-      <!-- <img src="assets/logo.svg" alt="PhotoCompressorPro" /> -->
-      <span>Photo<span class="accent">Compressor</span>Pro</span>
-    </a>
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">Photo<span class="accent">Compressor</span>Pro</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="site-nav" role="navigation">
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="resize.html">Resize</a></li>
-        <li><a href="pdf-to-word.html">PDF → Word</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a class="btn-cta" href="contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <!-- Main -->
   <main>
-    <input type="file" id="fileInput" accept="image/*">
-    <label for="fileInput">Choose or drag an image</label>
-    <input type="range" id="qualitySlider" min="10" max="90" value="70">
-    <p>Quality: <span id="qualityValue">70</span>%</p>
-    <button id="compressBtn">Compress & Download</button>
-    <div id="output"></div>
+    <section class="card">
+      <div class="hero">
+        <h1>Compress Images Online (JPG/PNG)</h1>
+        <p>Fast, secure, and runs in your browser. No uploads. No sign-up.</p>
+      </div>
+
+      <!-- Uploader -->
+      <div id="drop" class="uploader">
+        <label class="btn secondary" for="fileInput">📁 Choose Images</label>
+        <input id="fileInput" type="file" accept="image/*" multiple>
+        <div class="hint">or drag & drop files here</div>
+
+        <div class="controls">
+          <span>Quality:</span>
+          <input id="quality" class="range" type="range" min="40" max="95" value="75">
+          <span class="kvs"><span id="qv">75</span>%</span>
+          <button id="compress" class="btn">Compress & Download</button>
+        </div>
+      </div>
+
+      <!-- Output Grid -->
+      <div id="out" class="output"></div>
+    </section>
   </main>
+
   <footer>
-  <a href="privacy.html">Privacy Policy</a> |
-  <a href="blog.html">Blog</a>  
-  <a href="about.html">About</a> |
-  <a href="contact.html">Contact</a>
-</footer>
-  <footer>&copy; 2025 PhotoCompressorPro — Built by Mac</footer>
+    © 2025 PhotoCompressorPro.com • <a href="privacy.html">Privacy</a> • <a href="about.html">About</a> • <a href="contact.html">Contact</a>
+  </footer>
+
   <script>
-    const qualitySlider = document.getElementById('qualitySlider');
-    const qualityValue = document.getElementById('qualityValue');
-    const compressBtn = document.getElementById('compressBtn');
+    // Elements
     const fileInput = document.getElementById('fileInput');
-    const output = document.getElementById('output');
+    const drop = document.getElementById('drop');
+    const quality = document.getElementById('quality');
+    const qv = document.getElementById('qv');
+    const compressBtn = document.getElementById('compress');
+    const out = document.getElementById('out');
 
-    qualitySlider.oninput = () => qualityValue.textContent = qualitySlider.value;
+    // Update quality label
+    quality.addEventListener('input', ()=> qv.textContent = quality.value);
 
-    compressBtn.onclick = () => {
-      const file = fileInput.files[0];
-      if (!file) return alert("Please select an image");
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          canvas.width = img.width; canvas.height = img.height;
-          canvas.getContext('2d').drawImage(img, 0, 0);
-          canvas.toBlob(blob => {
-            const url = URL.createObjectURL(blob);
-            output.innerHTML = `<img src="${url}" alt="Compressed Image"><br>`;
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'compressed-' + file.name;
-            a.textContent = 'Download Image';
-            output.appendChild(a);
-          }, 'image/jpeg', qualitySlider.value/100);
+    // Drag & drop handlers
+    ;['dragenter','dragover'].forEach(evt => {
+      drop.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); drop.classList.add('dragging'); });
+    });
+    ;['dragleave','drop'].forEach(evt => {
+      drop.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); drop.classList.remove('dragging'); });
+    });
+    drop.addEventListener('drop', e => { fileInput.files = e.dataTransfer.files; });
+
+    // Core compression
+    function compressFile(file, q){
+      return new Promise((resolve, reject)=>{
+        const reader = new FileReader();
+        reader.onload = e=>{
+          const img = new Image();
+          img.onload = ()=>{
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            // Choose output type based on input; default JPEG for big savings
+            const isPNG = file.type.includes('png');
+            const mime = isPNG ? 'image/png' : 'image/jpeg';
+            const qualityFloat = isPNG ? undefined : q/100;
+
+            canvas.toBlob(blob=>{
+              if(!blob) return reject(new Error('Compression failed'));
+              resolve({ blob, width: img.width, height: img.height, name: file.name, type: mime });
+            }, mime, qualityFloat);
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
         };
-        img.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function formatKB(bytes){
+      return Math.round(bytes/1024) + ' KB';
+    }
+
+    async function handleCompress(){
+      const files = [...fileInput.files];
+      if(!files.length){ alert('Please choose at least one image.'); return; }
+      compressBtn.disabled = true; compressBtn.textContent = 'Processing…';
+
+      out.innerHTML = '';
+      const q = parseInt(quality.value, 10);
+
+      for(const f of files){
+        try{
+          const beforeSize = f.size;
+          const { blob, width, height, name } = await compressFile(f, q);
+          const url = URL.createObjectURL(blob);
+
+          const card = document.createElement('div');
+          card.className = 'thumb';
+          card.innerHTML = `
+            <img src="${url}" alt="Compressed preview">
+            <div class="meta">${name.replace(/</g,'&lt;')} • ${width}×${height}</div>
+            <div class="meta">Before: ${formatKB(beforeSize)} • After: ${formatKB(blob.size)}</div>
+          `;
+          const a = document.createElement('a');
+          a.className = 'btn';
+          a.href = url;
+          a.download = 'compressed-' + name.replace(/\s+/g,'-');
+          a.textContent = 'Download';
+          card.appendChild(a);
+
+          out.appendChild(card);
+        }catch(err){
+          console.error(err);
+          alert('Failed to compress: ' + f.name);
+        }
+      }
+
+      compressBtn.disabled = false; compressBtn.textContent = 'Compress & Download';
+    }
+
+    compressBtn.addEventListener('click', handleCompress);
   </script>
 </body>
 </html>
