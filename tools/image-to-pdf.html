@@ -81,71 +81,93 @@
   </footer>
 
   <script>
-    const $ = s=>document.querySelector(s);
-    const fileInput = $('#fileInput'), pageSizeEl = $('#pageSize'),
-          marginEl = $('#margin'), fitEl = $('#fitMode'), preview = $('#preview'),
-          btn = $('#makePdf');
+    <script>
+  const $ = s=>document.querySelector(s);
+  const fileInput = $('#fileInput'),
+        pageSizeEl = $('#pageSize'),
+        marginEl   = $('#margin'),
+        fitEl      = $('#fitMode'),
+        preview    = $('#preview'),
+        btn        = $('#makePdf');
 
-    function showPreview(files){
-      preview.innerHTML = '';
-      [...files].forEach(f=>{
-        const url = URL.createObjectURL(f);
-        const div = document.createElement('div');
-        div.className = 'thumb';
-        div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
-        preview.appendChild(div);
-      });
-    }
-    fileInput.addEventListener('change', ()=> showPreview(fileInput.files));
-
-    function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
-      const w = pageW - margin*2, h = pageH - margin*2;
-      const rImg = imgW / imgH, rBox = w / h;
-      let outW, outH;
-      if (mode === 'width'){ outW = w; outH = outW / rImg; }
-      else if (mode === 'height'){ outH = h; outW = outH * rImg; }
-      else if (mode === 'cover'){
-        if (rImg > rBox){ outH = h; outW = outH * rImg; }
-        else { outW = w; outH = outW / rImg; }
-      } else { // contain
-        if (rImg > rBox){ outW = w; outH = outW / rImg; }
-        else { outH = h; outW = outH * rImg; }
-      }
-      const x = margin + (w - outW)/2;
-      const y = margin + (h - outH)/2;
-      return {x,y,w:outW,h:outH};
-    }
-
-    btn.addEventListener('click', async ()=>{
-      const files = [...(fileInput.files||[])];
-      if (!files.length){ alert('Please choose at least one image.'); return; }
-      btn.disabled = true; btn.textContent = 'Building…';
-
-      const [{ jsPDF }] = [window.jspdf || {}]; // UMD
-      if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
-
-      const [size, orient] = pageSizeEl.value.split('|'); // 'a4','letter' + 'p'/'l'
-      const doc = new jsPDF({ format:size, orientation:(orient==='p'?'portrait':'landscape'), unit:'mm' });
-
-      const pageW = doc.internal.pageSize.getWidth();
-      const pageH = doc.internal.pageSize.getHeight();
-      const margin = parseInt(marginEl.value,10) || 10;
-      const mode = fitEl.value;
-
-      for (let i=0;i<files.length;i++){
-        const f = files[i];
-        const data = await f.arrayBuffer();
-        const url = URL.createObjectURL(new Blob([data]));
-        const img = new Image();
-        await new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src=url; });
-        const {x,y,w,h} = calcPlacement(img.naturalWidth||img.width, img.naturalHeight||img.height, pageW, pageH, margin, mode);
-        if (i>0) doc.addPage();
-        doc.addImage(img, 'JPEG', x, y, w, h, undefined, 'FAST'); // JPEG works for PNG too inside PDF
-        URL.revokeObjectURL(url);
-      }
-      doc.save('images.pdf');
-      btn.disabled = false; btn.textContent = 'Create PDF';
+  // Preview selected images
+  function showPreview(files){
+    preview.innerHTML = '';
+    [...files].forEach(f=>{
+      const url = URL.createObjectURL(f);
+      const div = document.createElement('div');
+      div.className = 'thumb';
+      div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
+      preview.appendChild(div);
     });
+  }
+  fileInput.addEventListener('change', ()=> showPreview(fileInput.files));
+
+  // Placement math
+  function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
+    const w = pageW - margin*2, h = pageH - margin*2;
+    const rImg = imgW / imgH, rBox = w / h;
+    let outW, outH;
+    if (mode === 'width'){ outW = w; outH = outW / rImg; }
+    else if (mode === 'height'){ outH = h; outW = outH * rImg; }
+    else if (mode === 'cover'){
+      if (rImg > rBox){ outH = h; outW = outH * rImg; }
+      else { outW = w; outH = outW / rImg; }
+    } else { // contain
+      if (rImg > rBox){ outW = w; outH = outW / rImg; }
+      else { outH = h; outW = outH * rImg; }
+    }
+    const x = margin + (w - outW)/2;
+    const y = margin + (h - outH)/2;
+    return {x,y,w:outW,h:outH};
+  }
+
+  // iOS-safe reader
+  const readAsDataURL = f => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result);
+    r.onerror = rej;
+    r.readAsDataURL(f);
+  });
+
+  // Build PDF (uses DataURL so it works on iPhone/Safari)
+  btn.addEventListener('click', async ()=>{
+    const files = [...(fileInput.files||[])];
+    if (!files.length){ alert('Please choose at least one image.'); return; }
+    btn.disabled = true; btn.textContent = 'Building…';
+
+    const [{ jsPDF }] = [window.jspdf || {}];
+    if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
+
+    const [size, orient] = pageSizeEl.value.split('|'); // 'a4'/'letter' + 'p'/'l'
+    const doc = new jsPDF({ format:size, orientation:(orient==='p'?'portrait':'landscape'), unit:'mm', compress:true });
+
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = parseInt(marginEl.value,10) || 10;
+    const mode = fitEl.value;
+
+    for (let i=0;i<files.length;i++){
+      const f = files[i];
+      const dataURL = await readAsDataURL(f); // iOS-safe
+      const img = new Image();
+      await new Promise((res, rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src=dataURL; });
+
+      const {x,y,w,h} = calcPlacement(
+        img.naturalWidth||img.width,
+        img.naturalHeight||img.height,
+        pageW, pageH, margin, mode
+      );
+
+      if (i>0) doc.addPage();
+      const fmt = (/\.(png)$/i.test(f.name) || (f.type||'').includes('png')) ? 'PNG' : 'JPEG';
+      doc.addImage(dataURL, fmt, x, y, w, h, undefined, 'FAST');
+    }
+
+    doc.save('images.pdf');
+    btn.disabled = false; btn.textContent = 'Create PDF';
+  });
+</script>
   </script>
 </body>
 </html>
