@@ -161,13 +161,10 @@
     quality.addEventListener('input', ()=> qv.textContent = quality.value);
 
     // Drag & drop handlers
-    ;['dragenter','dragover'].forEach(evt => {
-      drop.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); drop.classList.add('dragging'); });
-    });
-    ;['dragleave','drop'].forEach(evt => {
-      drop.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); drop.classList.remove('dragging'); });
-    });
-    drop.addEventListener('drop', e => { fileInput.files = e.dataTransfer.files; });
+    <!-- Drop zone (no extra choose button here) -->
+<div id="drop" class="uploader">
+  <div class="hint" id="fileStatus">No files selected — or drag & drop here</div>
+</div>
 
     // Core compression
     function compressFile(file, q){
