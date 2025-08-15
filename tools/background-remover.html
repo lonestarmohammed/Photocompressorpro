@@ -68,102 +68,133 @@
   </footer>
 
   <script>
-    const fileInput = document.getElementById('fileInput');
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d', { willReadFrequently:true });
-    const tol = document.getElementById('tol');
-    const tolv = document.getElementById('tolv');
-    const autoPick = document.getElementById('autoPick');
-    const downloadBtn = document.getElementById('download');
+    <script>
+  const fileInput = document.getElementById('fileInput');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d', { willReadFrequently:true });
+  const tol = document.getElementById('tol');
+  const tolv = document.getElementById('tolv');
+  const autoPick = document.getElementById('autoPick');
+  const downloadBtn = document.getElementById('download');
 
-    let imgEl = null;
+  let imgEl = null;
 
-    tol.addEventListener('input', ()=> tolv.textContent = tol.value);
+  tol.addEventListener('input', ()=> tolv.textContent = tol.value);
 
-    function loadImage(file){
-      return new Promise((resolve, reject)=>{
-        const r = new FileReader();
-        r.onload = e => {
-          const img = new Image();
-          img.onload = ()=> resolve(img);
-          img.onerror = reject;
-          img.src = e.target.result;
-        };
-        r.onerror = reject;
-        r.readAsDataURL(file);
-      });
-    }
-
-    function drawImageFit(img){
-      const maxW = Math.min(1600, img.width);
-      const scale = Math.min(maxW / img.width, 1);
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    }
-
-    fileInput.addEventListener('change', async ()=>{
-      const f = fileInput.files?.[0];
-      if (!f) return;
-      imgEl = await loadImage(f);
-      drawImageFit(imgEl);
+  function loadImage(file){
+    return new Promise((resolve, reject)=>{
+      const r = new FileReader();
+      r.onload = e => {
+        const img = new Image();
+        img.onload = ()=> resolve(img);
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      r.onerror = reject;
+      r.readAsDataURL(file);
     });
+  }
 
-    function getPixel(x,y){
-      const d = ctx.getImageData(x,y,1,1).data;
-      return {r:d[0],g:d[1],b:d[2],a:d[3]};
-    }
-    function colorDist(p,c){
-      const dr=p.r-c.r, dg=p.g-c.g, db=p.b-c.b;
-      return Math.sqrt(dr*dr + dg*dg + db*db);
-    }
-    function removeByColor(target, tolerance){
-      const w = canvas.width, h = canvas.height;
-      const imgData = ctx.getImageData(0,0,w,h);
-      const d = imgData.data;
-      for (let i=0;i<d.length;i+=4){
-        const r=d[i], g=d[i+1], b=d[i+2], a=d[i+3];
-        if (a===0) continue;
-        if (colorDist({r,g,b}, target) <= tolerance){
-          d[i+3] = 0; // transparent
-        }
+  function drawImageFit(img){
+    const maxW = Math.min(1600, img.width);
+    const scale = Math.min(maxW / img.width, 1);
+    canvas.width = Math.round(img.width * scale);
+    canvas.height = Math.round(img.height * scale);
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  }
+
+  fileInput.addEventListener('change', async ()=>{
+    const f = fileInput.files?.[0];
+    if (!f) return;
+    imgEl = await loadImage(f);
+    drawImageFit(imgEl);
+  });
+
+  function getPixel(x,y){
+    const d = ctx.getImageData(x,y,1,1).data;
+    return {r:d[0],g:d[1],b:d[2],a:d[3]};
+  }
+  function colorDist(p,c){
+    const dr=p.r-c.r, dg=p.g-c.g, db=p.b-c.b;
+    return Math.sqrt(dr*dr + dg*dg + db*db);
+  }
+  function removeByColor(target, tolerance){
+    const w = canvas.width, h = canvas.height;
+    const imgData = ctx.getImageData(0,0,w,h);
+    const d = imgData.data;
+    for (let i=0;i<d.length;i+=4){
+      const r=d[i], g=d[i+1], b=d[i+2], a=d[i+3];
+      if (a===0) continue;
+      if (colorDist({r,g,b}, target) <= tolerance){
+        d[i+3] = 0; // transparent
       }
-      ctx.putImageData(imgData, 0, 0);
     }
+    ctx.putImageData(imgData, 0, 0);
+  }
 
-    canvas.addEventListener('click', (e)=>{
-      if (!imgEl) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = Math.floor((e.clientX - rect.left) * (canvas.width/rect.width));
-      const y = Math.floor((e.clientY - rect.top)  * (canvas.height/rect.height));
-      const picked = getPixel(x,y);
-      removeByColor(picked, parseInt(tol.value,10));
+  canvas.addEventListener('click', (e)=>{
+    if (!imgEl) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.floor((e.clientX - rect.left) * (canvas.width/rect.width));
+    const y = Math.floor((e.clientY - rect.top)  * (canvas.height/rect.height));
+    const picked = getPixel(x,y);
+    removeByColor(picked, parseInt(tol.value,10));
+  });
+
+  autoPick.addEventListener('click', ()=>{
+    if (!imgEl) return;
+    const points = [
+      {x:2,y:2},
+      {x:canvas.width-3,y:2},
+      {x:2,y:canvas.height-3},
+      {x:canvas.width-3,y:canvas.height-3},
+    ];
+    const t = parseInt(tol.value,10);
+    points.forEach(p=>{
+      const picked = getPixel(p.x,p.y);
+      removeByColor(picked, t);
     });
+  });
 
-    autoPick.addEventListener('click', ()=>{
-      if (!imgEl) return;
-      // sample 4 corners and remove near colors
-      const points = [
-        {x:2,y:2},
-        {x:canvas.width-3,y:2},
-        {x:2,y:canvas.height-3},
-        {x:canvas.width-3,y:canvas.height-3},
-      ];
-      const t = parseInt(tol.value,10);
-      points.forEach(p=>{
-        const picked = getPixel(p.x,p.y);
-        removeByColor(picked, t);
-      });
-    });
-
-    downloadBtn.addEventListener('click', ()=>{
-      if (!canvas.width || !canvas.height) { alert('Please choose an image first.'); return; }
+  // iOS-safe download (toBlob + objectURL, with fallback)
+  function downloadCanvasPNG(canvas, filename='bg-removed.png'){
+    if (canvas.toBlob){
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(()=>{
+          URL.revokeObjectURL(url);
+          a.remove();
+          if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+            // some iOS versions ignore download attribute — open in new tab
+            window.open(url, '_blank');
+          }
+        }, 0);
+      }, 'image/png');
+    } else {
       const url = canvas.toDataURL('image/png');
       const a = document.createElement('a');
-      a.href = url; a.download = 'bg-removed.png';
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
       a.click();
-    });
+      a.remove();
+      if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        window.open(url, '_blank');
+      }
+    }
+  }
+
+  downloadBtn.addEventListener('click', ()=>{
+    if (!canvas.width || !canvas.height) { alert('Please choose an image first.'); return; }
+    downloadCanvasPNG(canvas, 'bg-removed.png');
+  });
+</script>
   </script>
 </body>
 </html>
