@@ -1,85 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Blog – Photo Compressor Pro</title>
-  <meta name="description" content="Tips on image compression, resizing, and faster page load.">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon"/>
+  <title>Blog – PhotoCompressorPro</title>
+  <meta name="description" content="Guides and tips for compressing images, converting images to PDF, and removing backgrounds.">
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
   <style>
-    :root{--brand:#007BFF;--ink:#222;--muted:#666;--bg:#f6f8fb}
-    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    header{background:var(--brand);color:#fff;padding:28px 16px;text-align:center}
-    header a{color:#fff;text-decoration:none;opacity:.9} header a:hover{opacity:1}
-    main{max-width:920px;margin:40px auto;padding:0 16px}
-    .post{background:#fff;border-radius:14px;box-shadow:0 6px 20px rgba(0,0,0,.06);padding:26px;margin-bottom:22px}
-    h1,h2{margin:0 0 12px} h1{font-size:1.9rem} h2{font-size:1.35rem}
-    .meta{color:var(--muted);font-size:.9rem;margin-bottom:10px}
-    .post p{line-height:1.7;margin:10px 0}
-    ul{margin:10px 0 10px 22px} li{margin:6px 0}
-    .cta{display:inline-block;margin-top:14px;background:var(--brand);color:#fff;text-decoration:none;padding:10px 14px;border-radius:10px;font-weight:600}
-    footer{padding:28px 16px;text-align:center;color:var(--muted)}
-    nav{margin-top:8px} nav a{color:#fff;margin:0 8px;text-decoration:none}
+    main{max-width:900px;margin:34px auto;padding:0 16px}
+    .post-list{display:grid;gap:16px}
+    .post{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:16px}
+    .post h3{margin:6px 0}
+    .post p{color:#6b7280;margin:6px 0 10px}
+    .post a.btn{display:inline-block;padding:10px 14px;border-radius:10px;background:#1f6fff;color:#fff;font-weight:700;text-decoration:none}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Photo Compressor Pro – Blog</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="blog.html">Blog</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="index.html">Photo<span class="accent">Compressor</span>Pro</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="tools/image-to-pdf.html">Image → PDF</a>
+        <a href="tools/background-remover.html">Background Remover</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
   </header>
 
   <main>
+    <h1>Blog</h1>
+    <div class="post-list">
+      <article class="post">
+        <h3>How to Convert Images to a Single PDF (Free & Private)</h3>
+        <p>Step-by-step guide using our Image → PDF tool, with best settings for printing, emailing, and size limits.</p>
+        <a class="btn" href="blog/image-to-pdf-guide.html">Read guide</a>
+      </article>
 
-    <!-- Post 1 -->
-    <article class="post">
-      <h2>How to Compress Images Online Without Losing Quality</h2>
-      <div class="meta">Updated: <time datetime="2025-08-11">11 Aug 2025</time> • 3-min read</div>
-      <p>Large images slow down uploads, emails, and website loading. With Photo Compressor Pro, you can reduce file size while keeping your photos sharp—directly in your browser, no upload required.</p>
-      <h3>Why compress images?</h3>
-      <ul>
-        <li><strong>Faster sharing:</strong> Smaller files send quicker on WhatsApp, email, or Drive.</li>
-        <li><strong>Better website speed:</strong> Compressed images improve Core Web Vitals and SEO.</li>
-        <li><strong>Save storage:</strong> Free up space on your phone or laptop.</li>
-      </ul>
-      <h3>Best settings</h3>
-      <ul>
-        <li><strong>Quality 60–80%</strong> (on JPG) keeps photos crisp while shrinking size a lot.</li>
-        <li><strong>Resize</strong> big images to the display size you actually need (e.g., 1920px width).</li>
-        <li>Use <strong>PNG</strong> only if you need transparency; otherwise JPG/WebP is smaller.</li>
-      </ul>
-      <h3>Steps</h3>
-      <ol>
-        <li>Open <a href="index.html">Photo Compressor Pro</a>.</li>
-        <li>Select your image(s).</li>
-        <li>Adjust the quality slider (start at 70%).</li>
-        <li>Download the compressed result.</li>
-      </ol>
-      <p>Because everything runs locally in your browser, your images remain private and never leave your device.</p>
-      <a class="cta" href="index.html">Try the Image Compressor →</a>
-    </article>
+      <article class="post">
+        <h3>Quick Background Removal: Click + Tolerance (No Upload)</h3>
+        <p>Remove solid or near-solid backgrounds directly in your browser and export as PNG with transparency.</p>
+        <a class="btn" href="blog/background-remover-tips.html">Read tips</a>
+      </article>
 
-    <!-- Post 2 (short list post for extra content) -->
-    <article class="post">
-      <h2>5 Quick Tips for Faster Websites Using Images</h2>
-      <div class="meta">2-min read</div>
-      <ul>
-        <li>Export at the exact size you’ll display—don’t load 4000px images in a 1200px container.</li>
-        <li>Prefer JPG/WebP for photos, PNG/SVG for icons and UI.</li>
-        <li>Lazy-load below-the-fold images.</li>
-        <li>Use descriptive filenames (e.g., <em>product-red-shoes.jpg</em>) for SEO.</li>
-        <li>Compress every upload with Photo Compressor Pro.</li>
-      </ul>
-      <a class="cta" href="index.html">Compress Images Now →</a>
-    </article>
-
+      <!-- keep your existing posts below if you have them -->
+    </div>
   </main>
 
-  <footer>
+  <footer style="text-align:center;color:#6b7280;margin:30px 0 24px;font-size:.9rem">
     © 2025 PhotoCompressorPro.com • <a href="privacy.html">Privacy</a> • <a href="about.html">About</a> • <a href="contact.html">Contact</a>
   </footer>
 </body>
