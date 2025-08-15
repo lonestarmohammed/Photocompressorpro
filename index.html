@@ -295,3 +295,163 @@
     }
   })();
 </script>
+<script>
+  // ====== elements (must exist in your HTML) ======
+  const fileInput   = document.getElementById('fileInput');  // <input type="file" multiple>
+  const qualityEl   = document.getElementById('quality');    // <input type="range">
+  const qv          = document.getElementById('qv');         // <span id="qv">75</span>
+  const compressBtn = document.getElementById('compress');   // <button id="compress">
+  const out         = document.getElementById('out');        // <div id="out">
+  const dropZone    = document.getElementById('drop');       // optional drop zone
+
+  // Keep label in sync
+  if (qualityEl && qv) {
+    const sync = () => (qv.textContent = qualityEl.value);
+    qualityEl.addEventListener('input', sync);
+    qualityEl.addEventListener('change', sync);
+    sync();
+  }
+
+  // Optional: drag & drop to the same file input
+  if (dropZone && fileInput) {
+    ['dragenter','dragover'].forEach(evt=>{
+      dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragging'); });
+    });
+    ['dragleave','drop'].forEach(evt=>{
+      dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragging'); });
+    });
+    dropZone.addEventListener('drop', e => { fileInput.files = e.dataTransfer.files; updateSelectionUI(); });
+  }
+
+  // Show selection status (optional)
+  function prettyKB(bytes){ return Math.round(bytes/1024) + ' KB'; }
+  function updateSelectionUI(){
+    const status = document.getElementById('fileStatus'); // optional element
+    const label  = document.querySelector('label[for="fileInput"]');
+    if (!fileInput) return;
+    const files = [...fileInput.files];
+    if (!files.length) {
+      if (status) status.textContent = 'No files selected — or drag & drop here';
+      if (label)  label.textContent  = '📁 Choose Images';
+      return;
+    }
+    if (files.length === 1) {
+      if (status) status.textContent = `Selected: ${files[0].name} — ${prettyKB(files[0].size)}`;
+      if (label)  label.textContent  = '📁 1 file selected';
+    } else {
+      const total = files.reduce((s,f)=>s+f.size,0);
+      if (status) status.textContent = `Selected: ${files.length} files — ${prettyKB(total)} total`;
+      if (label)  label.textContent  = `📁 ${files.length} files selected`;
+    }
+  }
+  if (fileInput) fileInput.addEventListener('change', updateSelectionUI);
+
+  // ====== compression helpers ======
+  function safeName(name){ return name.replace(/[^\w.\-]+/g,'-'); }
+  function looksLikePNG(file){ return (file.type && file.type.toLowerCase().includes('png')) || /\.png$/i.test(file.name); }
+  function dataURLToBlob(dataURL){
+    const [meta,b64] = dataURL.split(',');
+    const mime = (meta.match(/:(.*?);/)||[])[1] || 'application/octet-stream';
+    const bin  = atob(b64);
+    const len  = bin.length;
+    const buf  = new Uint8Array(len);
+    for (let i=0;i<len;i++) buf[i] = bin.charCodeAt(i);
+    return new Blob([buf], { type: mime });
+  }
+  function canvasHasAlpha(ctx, w, h, step=12){
+    try {
+      const d = ctx.getImageData(0,0,w,h).data;
+      for (let y=0;y<h;y+=step){
+        for (let x=0;x<w;x+=step){
+          if (d[(y*w + x)*4 + 3] < 255) return true;
+        }
+      }
+    } catch(e) { /* ignore */ }
+    return false;
+  }
+
+  function compressFile(file, q){
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader();
+      reader.onload = e=>{
+        const img = new Image();
+        img.onload = ()=>{
+          const c = document.createElement('canvas');
+          c.width = img.width; c.height = img.height;
+          const ctx = c.getContext('2d');
+          ctx.imageSmoothingEnabled = true;
+          ctx.drawImage(img, 0, 0);
+
+          // Auto format: keep PNG if it has transparency, else use JPEG for big savings
+          let mime = 'image/jpeg';
+          if (looksLikePNG(file) && canvasHasAlpha(ctx, c.width, c.height)) mime = 'image/png';
+
+          const qualityFloat = (mime === 'image/jpeg') ? (q/100) : undefined;
+
+          const finalize = (blob)=>{
+            if (!blob){
+              // Safari fallback
+              try {
+                const dataURL = c.toDataURL(mime, qualityFloat);
+                blob = dataURLToBlob(dataURL);
+              } catch(err){ return reject(err); }
+            }
+            resolve({ blob, width: img.width, height: img.height });
+          };
+
+          if (c.toBlob) c.toBlob(finalize, mime, qualityFloat);
+          else finalize(null);
+        };
+        img.onerror = reject;
+        img.src = e.target.result;
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  async function handleCompress(){
+    if (!fileInput || !qualityEl || !out || !compressBtn) return;
+    const files = [...fileInput.files];
+    if (!files.length){ alert('Please choose at least one image.'); return; }
+
+    const q = parseInt(qualityEl.value, 10) || 75;
+
+    compressBtn.disabled = true; compressBtn.textContent = 'Processing…';
+    out.innerHTML = '';
+
+    for (const f of files){
+      try{
+        const before = f.size;
+        const res = await compressFile(f, q);
+        const url = URL.createObjectURL(res.blob);
+
+        const card = document.createElement('div');
+        card.className = 'thumb';
+        card.innerHTML = `
+          <img src="${url}" alt="Compressed preview">
+          <div class="meta">${safeName(f.name)} • ${res.width}×${res.height}</div>
+          <div class="meta">Before: ${prettyKB(before)} • After: ${prettyKB(res.blob.size)}</div>
+        `;
+        const a = document.createElement('a');
+        a.className = 'btn';
+        a.href = url;
+        a.download = 'compressed-' + safeName(f.name);
+        a.textContent = 'Download';
+        card.appendChild(a);
+
+        out.appendChild(card);
+      }catch(err){
+        console.error(err);
+        alert('Failed to compress: ' + f.name);
+      }
+    }
+
+    compressBtn.disabled = false; compressBtn.textContent = 'Compress & Download';
+  }
+
+  // (Re)wire the button
+  if (compressBtn) {
+    compressBtn.addEventListener('click', handleCompress);
+  }
+</script>
