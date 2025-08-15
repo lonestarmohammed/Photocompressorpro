@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Image to PDF – PhotoCompressorPro</title>
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    main{max-width:960px;margin:34px auto;padding:0 16px}
+    .card{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.06);padding:24px}
+    .hero{text-align:center;margin-bottom:14px}
+    .hero h1{margin:0 0 6px;font-size:1.7rem}
+    .hero p{margin:0;color:#6b7280}
+    .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 14px}
+    .btn{appearance:none;border:0;border-radius:12px;cursor:pointer;background:linear-gradient(90deg,#1f6fff,#00c2ff);color:#fff;padding:12px 18px;font-weight:700;box-shadow:0 10px 22px rgba(31,111,255,.22)}
+    .btn.secondary{background:#eef2ff;color:#1f3a8a;box-shadow:none}
+    select, input[type="number"]{padding:10px 12px;border:1px solid #d1d5db;border-radius:10px}
+    .preview{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:12px}
+    .thumb{border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:8px;background:#fff;text-align:center}
+    .thumb img{max-width:100%;border-radius:8px}
+    .meta{font-size:.85rem;color:#6b7280;margin-top:6px}
+  </style>
+  <!-- jsPDF (small, client-side) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="../index.html">Photo<span class="accent">Compressor</span>Pro</a>
+      <nav>
+        <a href="../index.html">Home</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="card">
+      <div class="hero">
+        <h1>Image → PDF</h1>
+        <p>Combine multiple JPG/PNG images into a single PDF. Everything runs in your browser.</p>
+      </div>
+
+      <div class="controls">
+        <label class="btn secondary" for="fileInput">📁 Choose Images</label>
+        <input id="fileInput" type="file" accept="image/*" multiple style="display:none">
+
+        <label>Page:
+          <select id="pageSize">
+            <option value="a4|p" selected>A4 Portrait</option>
+            <option value="a4|l">A4 Landscape</option>
+            <option value="letter|p">Letter Portrait</option>
+            <option value="letter|l">Letter Landscape</option>
+          </select>
+        </label>
+
+        <label>Margin (mm):
+          <input id="margin" type="number" min="0" max="40" value="10">
+        </label>
+
+        <label>Fit:
+          <select id="fitMode">
+            <option value="contain" selected>Contain (no crop)</option>
+            <option value="cover">Cover (fill page)</option>
+            <option value="width">Fit width</option>
+            <option value="height">Fit height</option>
+          </select>
+        </label>
+
+        <button id="makePdf" class="btn">Create PDF</button>
+      </div>
+
+      <div id="preview" class="preview"></div>
+    </section>
+  </main>
+
+  <footer style="text-align:center;color:#6b7280;margin:30px 0 24px;font-size:.9rem">
+    © 2025 PhotoCompressorPro.com • <a href="../privacy.html">Privacy</a> • <a href="../about.html">About</a> • <a href="../contact.html">Contact</a>
+  </footer>
+
+  <script>
+    const $ = s=>document.querySelector(s);
+    const fileInput = $('#fileInput'), pageSizeEl = $('#pageSize'),
+          marginEl = $('#margin'), fitEl = $('#fitMode'), preview = $('#preview'),
+          btn = $('#makePdf');
+
+    function showPreview(files){
+      preview.innerHTML = '';
+      [...files].forEach(f=>{
+        const url = URL.createObjectURL(f);
+        const div = document.createElement('div');
+        div.className = 'thumb';
+        div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
+        preview.appendChild(div);
+      });
+    }
+    fileInput.addEventListener('change', ()=> showPreview(fileInput.files));
+
+    function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
+      const w = pageW - margin*2, h = pageH - margin*2;
+      const rImg = imgW / imgH, rBox = w / h;
+      let outW, outH;
+      if (mode === 'width'){ outW = w; outH = outW / rImg; }
+      else if (mode === 'height'){ outH = h; outW = outH * rImg; }
+      else if (mode === 'cover'){
+        if (rImg > rBox){ outH = h; outW = outH * rImg; }
+        else { outW = w; outH = outW / rImg; }
+      } else { // contain
+        if (rImg > rBox){ outW = w; outH = outW / rImg; }
+        else { outH = h; outW = outH * rImg; }
+      }
+      const x = margin + (w - outW)/2;
+      const y = margin + (h - outH)/2;
+      return {x,y,w:outW,h:outH};
+    }
+
+    btn.addEventListener('click', async ()=>{
+      const files = [...(fileInput.files||[])];
+      if (!files.length){ alert('Please choose at least one image.'); return; }
+      btn.disabled = true; btn.textContent = 'Building…';
+
+      const [{ jsPDF }] = [window.jspdf || {}]; // UMD
+      if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
+
+      const [size, orient] = pageSizeEl.value.split('|'); // 'a4','letter' + 'p'/'l'
+      const doc = new jsPDF({ format:size, orientation:(orient==='p'?'portrait':'landscape'), unit:'mm' });
+
+      const pageW = doc.internal.pageSize.getWidth();
+      const pageH = doc.internal.pageSize.getHeight();
+      const margin = parseInt(marginEl.value,10) || 10;
+      const mode = fitEl.value;
+
+      for (let i=0;i<files.length;i++){
+        const f = files[i];
+        const data = await f.arrayBuffer();
+        const url = URL.createObjectURL(new Blob([data]));
+        const img = new Image();
+        await new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src=url; });
+        const {x,y,w,h} = calcPlacement(img.naturalWidth||img.width, img.naturalHeight||img.height, pageW, pageH, margin, mode);
+        if (i>0) doc.addPage();
+        doc.addImage(img, 'JPEG', x, y, w, h, undefined, 'FAST'); // JPEG works for PNG too inside PDF
+        URL.revokeObjectURL(url);
+      }
+      doc.save('images.pdf');
+      btn.disabled = false; btn.textContent = 'Create PDF';
+    });
+  </script>
+</body>
+</html>
