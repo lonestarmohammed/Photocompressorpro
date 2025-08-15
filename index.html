@@ -270,5 +270,31 @@
   // Just call updateSelectionUI after that:
   dropZoneEl.addEventListener('drop', () => updateSelectionUI(fileInputEl.files));
 </script>
+  <script>
+  // Sync the live % label
+  (function(){
+    const slider = document.getElementById('quality');
+    const qv = document.getElementById('qv');
+    if (!slider || !qv) return;
+
+    function updateLabel(){
+      qv.textContent = String(slider.value);
+      // fire a custom event if you want other parts to react
+      slider.dispatchEvent(new CustomEvent('qualitychange', { detail: { value: parseInt(slider.value,10) }}));
+    }
+    slider.addEventListener('input', updateLabel);
+    slider.addEventListener('change', updateLabel);
+    updateLabel(); // initialize on load
+  })();
+
+  // Helper you can use in your compressor code
+  function getQualityValue(){
+    const el = document.getElementById('quality');
+    return el ? parseInt(el.value, 10) : 75; // default fallback
+  }
+
+  // Example: in your existing handler, replace q acquisition with:
+  // const q = getQualityValue();
+</script>
 </body>
 </html>
