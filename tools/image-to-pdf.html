@@ -83,91 +83,124 @@
   </footer>
 
   <script>
-    const $ = s=>document.querySelector(s);
-    const pickBtn   = $('#pickBtn');
-    const fileInput = $('#fileInput');
-    const pageSizeEl= $('#pageSize');
-    const marginEl  = $('#margin');
-    const fitEl     = $('#fitMode');
-    const preview   = $('#preview');
-    const btn       = $('#makePdf');
+    <script>
+  const $ = s=>document.querySelector(s);
+  const pickBtn   = $('#pickBtn');
+  const fileInput = $('#fileInput');
+  const pageSizeEl= $('#pageSize');
+  const marginEl  = $('#margin');
+  const fitEl     = $('#fitMode');
+  const preview   = $('#preview');
+  const btn       = $('#makePdf');
 
-    // open file picker reliably on iOS/Android/desktop
-    pickBtn.addEventListener('click', ()=> fileInput.click());
+  // Open system picker (works on iOS/Android/desktop)
+  pickBtn?.addEventListener('click', ()=> fileInput.click());
 
-    function showPreview(files){
-      preview.innerHTML = '';
-      [...files].forEach(f=>{
-        const url = URL.createObjectURL(f);
-        const div = document.createElement('div');
-        div.className = 'thumb';
-        div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
-        preview.appendChild(div);
-      });
+  // Small preview of selected images
+  function showPreview(files){
+    preview.innerHTML = '';
+    [...files].forEach(f=>{
+      const url = URL.createObjectURL(f);
+      const div = document.createElement('div');
+      div.className = 'thumb';
+      div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
+      preview.appendChild(div);
+    });
+  }
+  fileInput?.addEventListener('change', ()=> showPreview(fileInput.files));
+
+  // Fit/cover math
+  function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
+    const w = pageW - margin*2, h = pageH - margin*2;
+    const rImg = imgW / imgH, rBox = w / h;
+    let outW, outH;
+    if (mode === 'width'){ outW = w; outH = outW / rImg; }
+    else if (mode === 'height'){ outH = h; outW = outH * rImg; }
+    else if (mode === 'cover'){
+      if (rImg > rBox){ outH = h; outW = outH * rImg; }
+      else { outW = w; outH = outW / rImg; }
+    } else { // contain
+      if (rImg > rBox){ outW = w; outH = outW / rImg; }
+      else { outH = h; outW = outH * rImg; }
     }
-    fileInput.addEventListener('change', ()=> showPreview(fileInput.files));
+    const x = margin + (w - outW)/2;
+    const y = margin + (h - outH)/2;
+    return {x,y,w:outW,h:outH};
+  }
 
-    function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
-      const w = pageW - margin*2, h = pageH - margin*2;
-      const rImg = imgW / imgH, rBox = w / h;
-      let outW, outH;
-      if (mode === 'width'){ outW = w; outH = outW / rImg; }
-      else if (mode === 'height'){ outH = h; outW = outH * rImg; }
-      else if (mode === 'cover'){
-        if (rImg > rBox){ outH = h; outW = outH * rImg; }
-        else { outW = w; outH = outW / rImg; }
-      } else { // contain
-        if (rImg > rBox){ outW = w; outH = outW / rImg; }
-        else { outH = h; outW = outH * rImg; }
+  // iOS-safe: read files as DataURL
+  const readAsDataURL = f => new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = e => res(e.target.result);
+    r.onerror = rej;
+    r.readAsDataURL(f);
+  });
+
+  // iOS-safe: save blob with fallback
+  function savePdfBlob(doc, filename='images.pdf'){
+    const blob = doc.output('blob');                  // create Blob in memory
+    const url  = URL.createObjectURL(blob);           // object URL (works better than datauri on iOS)
+    const a    = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+
+    // If iOS ignores download attribute, open new tab as fallback
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    setTimeout(()=>{
+      if (isIOS) {
+        try { window.open(url, '_blank'); } catch(_){}
       }
-      const x = margin + (w - outW)/2;
-      const y = margin + (h - outH)/2;
-      return {x,y,w:outW,h:outH};
-    }
+      // Revoke after a short delay to allow Safari to access it
+      setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 1500);
+    }, 0);
+  }
 
-    const readAsDataURL = f => new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = e => res(e.target.result);
-      r.onerror = rej;
-      r.readAsDataURL(f);
+  btn?.addEventListener('click', async ()=>{
+    const files = [...(fileInput?.files||[])];
+    if (!files.length){ alert('Please choose at least one image.'); return; }
+    btn.disabled = true; btn.textContent = 'Building…';
+
+    const [{ jsPDF }] = [window.jspdf || {}];
+    if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
+
+    const [size, orient] = pageSizeEl.value.split('|');
+    const doc = new jsPDF({
+      format: size,
+      orientation: (orient==='p'?'portrait':'landscape'),
+      unit: 'mm',
+      compress: true
     });
 
-    btn.addEventListener('click', async ()=>{
-      const files = [...(fileInput.files||[])];
-      if (!files.length){ alert('Please choose at least one image.'); return; }
-      btn.disabled = true; btn.textContent = 'Building…';
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = parseInt(marginEl.value,10) || 10;
+    const mode = fitEl.value;
 
-      const [{ jsPDF }] = [window.jspdf || {}];
-      if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
+    for (let i=0;i<files.length;i++){
+      const f = files[i];
+      // Read file → DataURL (iOS friendly)
+      const dataURL = await readAsDataURL(f);
+      const img = new Image();
+      await new Promise((res, rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src=dataURL; });
 
-      const [size, orient] = pageSizeEl.value.split('|');
-      const doc = new jsPDF({ format:size, orientation:(orient==='p'?'portrait':'landscape'), unit:'mm', compress:true });
+      const {x,y,w,h} = calcPlacement(
+        img.naturalWidth||img.width,
+        img.naturalHeight||img.height,
+        pageW, pageH, margin, mode
+      );
 
-      const pageW = doc.internal.pageSize.getWidth();
-      const pageH = doc.internal.pageSize.getHeight();
-      const margin = parseInt(marginEl.value,10) || 10;
-      const mode = fitEl.value;
+      if (i>0) doc.addPage();
+      const fmt = (/\.(png)$/i.test(f.name) || (f.type||'').includes('png')) ? 'PNG' : 'JPEG';
+      doc.addImage(dataURL, fmt, x, y, w, h, undefined, 'FAST');
+    }
 
-      for (let i=0;i<files.length;i++){
-        const f = files[i];
-        const dataURL = await readAsDataURL(f); // iOS-safe DataURL
-        const img = new Image();
-        await new Promise((res, rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src=dataURL; });
-
-        const {x,y,w,h} = calcPlacement(
-          img.naturalWidth||img.width,
-          img.naturalHeight||img.height,
-          pageW, pageH, margin, mode
-        );
-
-        if (i>0) doc.addPage();
-        const fmt = (/\.(png)$/i.test(f.name) || (f.type||'').includes('png')) ? 'PNG' : 'JPEG';
-        doc.addImage(dataURL, fmt, x, y, w, h, undefined, 'FAST');
-      }
-
-      doc.save('images.pdf');
-      btn.disabled = false; btn.textContent = 'Create PDF';
-    });
+    // iOS-safe save
+    savePdfBlob(doc, 'images.pdf');
+    btn.disabled = false; btn.textContent = 'Create PDF';
+  });
+</script>
   </script>
 </body>
 </html>
