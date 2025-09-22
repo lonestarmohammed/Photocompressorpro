@@ -3,48 +3,34 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <!-- Open Graph Meta Tags -->
-<meta property="og:title" content="Photo Compressor Pro - Free Online Image Compression Tool">
-<meta property="og:description" content="Compress your images online quickly and for free. Save space without losing quality.">
-<meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
-<meta property="og:url" content="https://www.photocompressorpro.com/">
-<meta property="og:type" content="website">
 
-<!-- Twitter Card (optional but good for SEO) -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Photo Compressor Pro - Free Online Image Compression Tool">
-<meta name="twitter:description" content="Compress your images online quickly and for free. Save space without losing quality.">
-<meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
-  <!-- Primary Meta Tags -->
-<title>Photo Compressor Pro - Free Online Image Compressor</title>
-<meta name="title" content="Photo Compressor Pro - Free Online Image Compressor">
-<meta name="description" content="Compress images online without losing quality. Free tool to reduce image size for faster uploads and better performance.">
+  <!-- Primary Meta -->
+  <title>Photo Compressor Pro – Compress Images Online (JPG/PNG/WebP)</title>
+  <meta name="description" content="Free online image compressor. Reduce JPG/PNG/WebP size without losing visible quality. Fast, secure, and runs in your browser.">
 
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.photocompressorpro.com/">
-<meta property="og:title" content="Photo Compressor Pro - Free Online Image Compressor">
-<meta property="og:description" content="Compress images online without losing quality. Free tool to reduce image size for faster uploads and better performance.">
-<meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
-
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://www.photocompressorpro.com/">
-<meta property="twitter:title" content="Photo Compressor Pro - Free Online Image Compressor">
-<meta property="twitter:description" content="Compress images online without losing quality. Free tool to reduce image size for faster uploads and better performance.">
-<meta property="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
-  <title>Photo Compressor Pro – Compress Images Online</title>
-  <meta name="description" content="Free online image compressor. Reduce JPG/PNG size without losing visible quality. Fast, secure, and runs in your browser.">
-  <title>Photo Compressor Pro - Free Online Image Compression Tool</title>
-<meta name="description" content="Compress images online instantly with Photo Compressor Pro. Free, fast, and high-quality image compression without losing clarity. Perfect for web, social media, and storage.">
-  <title>Free Image Compressor Online - Reduce Image Size Easily</title>
-<meta name="description" content="Use our free Image Compressor to reduce image size online without losing quality. Compress JPG, PNG, and WebP images quickly for websites, emails, and social media.">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <!-- Canonical -->
   <link rel="canonical" href="https://www.photocompressorpro.com/" />
 
-  <!-- Keep your AdSense verification script in <head> (as you already added). -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9087913537288549"
-     crossorigin="anonymous"></script>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.photocompressorpro.com/">
+  <meta property="og:title" content="Photo Compressor Pro - Free Online Image Compression Tool">
+  <meta property="og:description" content="Compress images online without losing quality. Free tool to reduce image size for faster uploads and better performance.">
+  <meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.photocompressorpro.com/">
+  <meta name="twitter:title" content="Photo Compressor Pro - Free Online Image Compressor">
+  <meta name="twitter:description" content="Compress images online instantly with Photo Compressor Pro. Free, fast, and high-quality image compression without losing clarity.">
+  <meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+
+  <!-- AdSense (verification/loader) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9087913537288549" crossorigin="anonymous"></script>
+
   <style>
     :root{
       --brand:#1f6fff;
@@ -55,6 +41,7 @@
     }
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+
     /* Header */
     header.site-header{
       position:sticky;top:0;z-index:50;
@@ -79,9 +66,7 @@
       box-shadow:0 8px 28px rgba(0,0,0,.06);
       padding:24px;
     }
-    .hero{
-      text-align:center;margin-bottom:14px
-    }
+    .hero{text-align:center;margin-bottom:14px}
     .hero h1{margin:0 0 6px;font-size:1.7rem}
     .hero p{margin:0;color:var(--muted)}
 
@@ -105,17 +90,12 @@
     .hint{font-size:.92rem;color:var(--muted)}
     .dragging{background:#eef4ff;border-color:var(--brand)}
     .controls{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
-    .range{width:240px}
-    .kvs{font-weight:700;color:var(--brand)}
+    .quality-range{width:240px}
+    .quality-value{font-weight:700;color:var(--brand)}
 
     /* Output */
-    .output{
-      margin-top:18px;display:grid;gap:16px;
-      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    }
-    .thumb{
-      background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:12px;text-align:center
-    }
+    .output{margin-top:18px;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .thumb{background:#fff;border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:12px;text-align:center}
     .thumb img{max-width:100%;border-radius:8px;border:1px solid rgba(15,23,42,.06)}
     .meta{font-size:.85rem;color:var(--muted);margin:8px 0}
     .thumb .btn{width:100%}
@@ -127,14 +107,14 @@
   <!-- Header -->
   <header class="site-header">
     <div class="nav-wrap">
-      <a class="brand" href="index.html">Photo<span class="accent">Compressor</span>Pro</a>
+      <a class="brand" href="/">Photo<span class="accent">Compressor</span>Pro</a>
       <nav>
-  <a href="index.html">Home</a>
-  <a href="tools/image-to-pdf.html">Image → PDF</a>
-  <a href="tools/background-remover.html">Background Remover</a>
-  <a href="blog.html">Blog</a>
-  <a href="contact.html">Contact</a>
-</nav>
+        <a href="/">Home</a>
+        <a href="tools/image-to-pdf.html">Image → PDF</a>
+        <a href="tools/background-remover.html">Background Remover</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
     </div>
   </header>
 
@@ -144,35 +124,31 @@
       <div class="hero">
         <h1>Compress Images Online (JPG/PNG)</h1>
         <p>PhotoCompressorPro is a fast, free, and privacy-friendly image compression tool that reduces file size without hurting quality. Oversized images slow down websites, eat up storage, and take forever to share. Our smart compression balances size and clarity so your photos stay sharp but load lightning-fast. Whether you’re a student emailing assignments, a professional designer preparing presentations, or a business owner improving site performance, our tool is designed to save you time.</p>
-<p>Unlike many online services, everything happens <strong>in your browser</strong>—your images are never uploaded to a server. That means 100% privacy and instant results. Choose your images, adjust the quality slider, preview instantly, and download optimized photos in seconds. It works perfectly for social media uploads, website images, and everyday photo management.</p>
-<ul>
-  <li><strong>Fast & private:</strong> No servers, no watermarks, no sign-up.</li>
-  <li><strong>Multiple formats:</strong> JPG, PNG, WebP supported.</li>
-  <li><strong>Save storage & boost speed:</strong> Compress once, use everywhere.</li>
-</ul>
+        <p>Unlike many online services, everything happens <strong>in your browser</strong>—your images are never uploaded to a server. That means 100% privacy and instant results. Choose your images, adjust the quality slider, preview instantly, and download optimized photos in seconds. It works perfectly for social media uploads, website images, and everyday photo management.</p>
+        <ul>
+          <li><strong>Fast & private:</strong> No servers, no watermarks, no sign-up.</li>
+          <li><strong>Multiple formats:</strong> JPG, PNG, WebP supported.</li>
+          <li><strong>Save storage & boost speed:</strong> Compress once, use everywhere.</li>
+        </ul>
+      </div>
 
       <!-- Uploader -->
       <div id="drop" class="uploader">
         <div class="hint" id="fileStatus">No files selected</div>
 
-        <!-- Controls (ONE choose button, ONE hidden input) -->
-<div class="controls">
-  <label class="btn secondary" for="fileInput">📁 Choose Images</label>
-  <input id="fileInput" type="file" accept="image/*" multiple style="display:none">
+        <div class="controls">
+          <label class="btn secondary" for="fileInput">📁 Choose Images</label>
+          <input id="fileInput" type="file" accept="image/*" multiple>
 
-  <!-- Quality -->
-  <label class="quality-label" for="quality">Quality</label>
-  <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75">
-  <span class="quality-value"><span id="qv">75</span>%</span>
+          <label class="quality-label" for="quality">Quality</label>
+          <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75">
+          <span class="quality-value"><span id="qv">75</span>%</span>
 
-  <!-- Action -->
-  <button id="compress" class="btn">Compress & Download</button>
-</div>
+          <button id="compress" class="btn">Compress & Download</button>
+        </div>
+      </div>
 
-<!-- Results grid (keep this if it was removed) -->
-<div id="out" class="output"></div>
-
-      <!-- Output Grid -->
+      <!-- Results grid -->
       <div id="out" class="output"></div>
     </section>
   </main>
@@ -182,22 +158,74 @@
   </footer>
 
   <script>
-    // Elements
-    const fileInput = document.getElementById('fileInput');
-    const drop = document.getElementById('drop');
-    const quality = document.getElementById('quality');
-    const qv = document.getElementById('qv');
+    // ===== Elements =====
+    const fileInput   = document.getElementById('fileInput');
+    const qualityEl   = document.getElementById('quality');
+    const qv          = document.getElementById('qv');
     const compressBtn = document.getElementById('compress');
-    const out = document.getElementById('out');
+    const out         = document.getElementById('out');
+    const dropZone    = document.getElementById('drop');
+    const statusEl    = document.getElementById('fileStatus');
 
-    // Update quality label
-    quality.addEventListener('input', ()=> qv.textContent = quality.value);
+    // ===== Helpers =====
+    function prettyBytes(bytes){
+      if (bytes < 1024) return bytes + ' B';
+      const kb = bytes / 1024;
+      if (kb < 1024) return Math.round(kb) + ' KB';
+      const mb = kb / 1024;
+      return (Math.round(mb * 10) / 10) + ' MB';
+    }
+    function safeName(name){ return name.replace(/[^\w.\-]+/g,'-'); }
+    function looksLikePNG(file){ return (file.type && file.type.toLowerCase().includes('png')) || /\.png$/i.test(file.name); }
+    function dataURLToBlob(dataURL){
+      const [meta,b64] = dataURL.split(',');
+      const mime = (meta.match(/:(.*?);/)||[])[1] || 'application/octet-stream';
+      const bin  = atob(b64);
+      const buf  = new Uint8Array(bin.length);
+      for (let i=0;i<bin.length;i++) buf[i] = bin.charCodeAt(i);
+      return new Blob([buf], { type: mime });
+    }
+    function canvasHasAlpha(ctx, w, h, step=12){
+      try {
+        const d = ctx.getImageData(0,0,w,h).data;
+        for (let y=0;y<h;y+=step){
+          for (let x=0;x<w;x+=step){
+            if (d[(y*w + x)*4 + 3] < 255) return true;
+          }
+        }
+      } catch(e) { /* ignore */ }
+      return false;
+    }
 
-    // Drag & drop handlers
-    <!-- Drop zone (no extra choose button here) -->
-<div id="drop" class="uploader">
-  <div class="hint" id="fileStatus">No files selected — or drag & drop here</div>
-</div>
+    // UI updates
+    function updateSelectionUI(){
+      if (!fileInput) return;
+      const files = [...fileInput.files];
+      if (!files.length){
+        if (statusEl) statusEl.textContent = 'No files selected';
+        return;
+      }
+      if (files.length === 1){
+        if (statusEl) statusEl.textContent = `Selected: ${files[0].name} — ${prettyBytes(files[0].size)}`;
+      } else {
+        const total = files.reduce((s,f)=>s+f.size,0);
+        if (statusEl) statusEl.textContent = `Selected: ${files.length} files — ${prettyBytes(total)} total`;
+      }
+    }
+
+    // Quality label sync
+    function syncQuality(){ if (qv && qualityEl) qv.textContent = qualityEl.value; }
+
+    // Drag & drop bindings
+    if (dropZone){
+      ['dragenter','dragover'].forEach(evt=>{
+        dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragging'); });
+      });
+      ['dragleave','drop'].forEach(evt=>{
+        dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragging'); });
+      });
+      dropZone.addEventListener('drop', e => { if (fileInput) { fileInput.files = e.dataTransfer.files; updateSelectionUI(); } });
+    }
 
     // Core compression
     function compressFile(file, q){
@@ -206,21 +234,30 @@
         reader.onload = e=>{
           const img = new Image();
           img.onload = ()=>{
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
+            const c = document.createElement('canvas');
+            c.width = img.width; c.height = img.height;
+            const ctx = c.getContext('2d');
+            ctx.imageSmoothingEnabled = true;
             ctx.drawImage(img, 0, 0);
 
-            // Choose output type based on input; default JPEG for big savings
-            const isPNG = file.type.includes('png');
-            const mime = isPNG ? 'image/png' : 'image/jpeg';
-            const qualityFloat = isPNG ? undefined : q/100;
+            // Auto format: keep PNG if it has transparency, else JPEG
+            let mime = 'image/jpeg';
+            if (looksLikePNG(file) && canvasHasAlpha(ctx, c.width, c.height)) mime = 'image/png';
+            const qualityFloat = (mime === 'image/jpeg') ? (q/100) : undefined;
 
-            canvas.toBlob(blob=>{
-              if(!blob) return reject(new Error('Compression failed'));
-              resolve({ blob, width: img.width, height: img.height, name: file.name, type: mime });
-            }, mime, qualityFloat);
+            const finalize = (blob)=>{
+              if (!blob){
+                // Safari fallback
+                try {
+                  const dataURL = c.toDataURL(mime, qualityFloat);
+                  blob = dataURLToBlob(dataURL);
+                } catch(err){ return reject(err); }
+              }
+              resolve({ blob, width: img.width, height: img.height, name: file.name });
+            };
+
+            if (c.toBlob) c.toBlob(finalize, mime, qualityFloat);
+            else finalize(null);
           };
           img.onerror = reject;
           img.src = e.target.result;
@@ -230,35 +267,31 @@
       });
     }
 
-    function formatKB(bytes){
-      return Math.round(bytes/1024) + ' KB';
-    }
-
     async function handleCompress(){
-      const files = [...fileInput.files];
-      if(!files.length){ alert('Please choose at least one image.'); return; }
+      const files = fileInput ? [...fileInput.files] : [];
+      if (!files.length){ alert('Please choose at least one image.'); return; }
+
+      const q = parseInt(qualityEl.value, 10) || 75;
       compressBtn.disabled = true; compressBtn.textContent = 'Processing…';
-
       out.innerHTML = '';
-      const q = parseInt(quality.value, 10);
 
-      for(const f of files){
+      for (const f of files){
         try{
-          const beforeSize = f.size;
-          const { blob, width, height, name } = await compressFile(f, q);
-          const url = URL.createObjectURL(blob);
+          const before = f.size;
+          const res = await compressFile(f, q);
+          const url = URL.createObjectURL(res.blob);
 
           const card = document.createElement('div');
           card.className = 'thumb';
           card.innerHTML = `
             <img src="${url}" alt="Compressed preview">
-            <div class="meta">${name.replace(/</g,'&lt;')} • ${width}×${height}</div>
-            <div class="meta">Before: ${formatKB(beforeSize)} • After: ${formatKB(blob.size)}</div>
+            <div class="meta">${safeName(res.name)} • ${res.width}×${res.height}</div>
+            <div class="meta">Before: ${prettyBytes(before)} • After: ${prettyBytes(res.blob.size)}</div>
           `;
           const a = document.createElement('a');
           a.className = 'btn';
           a.href = url;
-          a.download = 'compressed-' + name.replace(/\s+/g,'-');
+          a.download = 'compressed-' + safeName(res.name);
           a.textContent = 'Download';
           card.appendChild(a);
 
@@ -272,228 +305,10 @@
       compressBtn.disabled = false; compressBtn.textContent = 'Compress & Download';
     }
 
-    compressBtn.addEventListener('click', handleCompress);
+    // Bindings
+    if (fileInput) fileInput.addEventListener('change', updateSelectionUI);
+    if (qualityEl) { qualityEl.addEventListener('input', syncQuality); qualityEl.addEventListener('change', syncQuality); syncQuality(); }
+    if (compressBtn) compressBtn.addEventListener('click', handleCompress);
   </script>
-  <script>
-  // Helper: nice KB/MB display
-  function prettyBytes(bytes){
-    if (bytes < 1024) return bytes + ' B';
-    const kb = bytes / 1024;
-    if (kb < 1024) return Math.round(kb) + ' KB';
-    const mb = kb / 1024;
-    return (Math.round(mb * 10) / 10) + ' MB';
-  }
-
-  // Update the UI to show selected files
-  function updateSelectionUI(files){
-    const statusEl = document.getElementById('fileStatus');
-    const labelEl  = document.querySelector('label[for="fileInput"]');
-
-    if (!files || !files.length) {
-      statusEl.textContent = 'No files selected';
-      if (labelEl) labelEl.textContent = '📁 Choose Images';
-      return;
-    }
-
-    if (files.length === 1) {
-      statusEl.textContent = `Selected: ${files[0].name} — ${prettyBytes(files[0].size)}`;
-      if (labelEl) labelEl.textContent = '📁 1 file selected';
-    } else {
-      const total = [...files].reduce((s,f)=>s+f.size,0);
-      statusEl.textContent = `Selected: ${files.length} files — ${prettyBytes(total)} total`;
-      if (labelEl) labelEl.textContent = `📁 ${files.length} files selected`;
-    }
-  }
-
-  // Hook into your existing input & drop events
-  const fileInputEl = document.getElementById('fileInput');
-  const dropZoneEl  = document.getElementById('drop');
-
-  fileInputEl.addEventListener('change', () => updateSelectionUI(fileInputEl.files));
-
-  // When using drag & drop, you likely already set:
-  // fileInput.files = e.dataTransfer.files;
-  // Just call updateSelectionUI after that:
-  dropZoneEl.addEventListener('drop', () => updateSelectionUI(fileInputEl.files));
-</script>
-  <script>
-  // Quality label sync
-  (function(){
-    const slider = document.getElementById('quality');
-    const qv = document.getElementById('qv');
-    if (!slider || !qv) return;
-    const update = ()=> qv.textContent = slider.value;
-    slider.addEventListener('input', update);
-    slider.addEventListener('change', update);
-    update();
-  })();
-
-  // If your previous code defines handleCompress, re-hook the button:
-  (function(){
-    const btn = document.getElementById('compress');
-    if (!btn) return;
-    if (typeof handleCompress === 'function') {
-      btn.addEventListener('click', handleCompress);
-    }
-  })();
-</script>
-<script>
-  // ====== elements (must exist in your HTML) ======
-  const fileInput   = document.getElementById('fileInput');  // <input type="file" multiple>
-  const qualityEl   = document.getElementById('quality');    // <input type="range">
-  const qv          = document.getElementById('qv');         // <span id="qv">75</span>
-  const compressBtn = document.getElementById('compress');   // <button id="compress">
-  const out         = document.getElementById('out');        // <div id="out">
-  const dropZone    = document.getElementById('drop');       // optional drop zone
-
-  // Keep label in sync
-  if (qualityEl && qv) {
-    const sync = () => (qv.textContent = qualityEl.value);
-    qualityEl.addEventListener('input', sync);
-    qualityEl.addEventListener('change', sync);
-    sync();
-  }
-
-  // Optional: drag & drop to the same file input
-  if (dropZone && fileInput) {
-    ['dragenter','dragover'].forEach(evt=>{
-      dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.add('dragging'); });
-    });
-    ['dragleave','drop'].forEach(evt=>{
-      dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragging'); });
-    });
-    dropZone.addEventListener('drop', e => { fileInput.files = e.dataTransfer.files; updateSelectionUI(); });
-  }
-
-  // Show selection status (optional)
-  function prettyKB(bytes){ return Math.round(bytes/1024) + ' KB'; }
-  function updateSelectionUI(){
-    const status = document.getElementById('fileStatus'); // optional element
-    const label  = document.querySelector('label[for="fileInput"]');
-    if (!fileInput) return;
-    const files = [...fileInput.files];
-    if (!files.length) {
-      if (status) status.textContent = 'No files selected — or drag & drop here';
-      if (label)  label.textContent  = '📁 Choose Images';
-      return;
-    }
-    if (files.length === 1) {
-      if (status) status.textContent = `Selected: ${files[0].name} — ${prettyKB(files[0].size)}`;
-      if (label)  label.textContent  = '📁 1 file selected';
-    } else {
-      const total = files.reduce((s,f)=>s+f.size,0);
-      if (status) status.textContent = `Selected: ${files.length} files — ${prettyKB(total)} total`;
-      if (label)  label.textContent  = `📁 ${files.length} files selected`;
-    }
-  }
-  if (fileInput) fileInput.addEventListener('change', updateSelectionUI);
-
-  // ====== compression helpers ======
-  function safeName(name){ return name.replace(/[^\w.\-]+/g,'-'); }
-  function looksLikePNG(file){ return (file.type && file.type.toLowerCase().includes('png')) || /\.png$/i.test(file.name); }
-  function dataURLToBlob(dataURL){
-    const [meta,b64] = dataURL.split(',');
-    const mime = (meta.match(/:(.*?);/)||[])[1] || 'application/octet-stream';
-    const bin  = atob(b64);
-    const len  = bin.length;
-    const buf  = new Uint8Array(len);
-    for (let i=0;i<len;i++) buf[i] = bin.charCodeAt(i);
-    return new Blob([buf], { type: mime });
-  }
-  function canvasHasAlpha(ctx, w, h, step=12){
-    try {
-      const d = ctx.getImageData(0,0,w,h).data;
-      for (let y=0;y<h;y+=step){
-        for (let x=0;x<w;x+=step){
-          if (d[(y*w + x)*4 + 3] < 255) return true;
-        }
-      }
-    } catch(e) { /* ignore */ }
-    return false;
-  }
-
-  function compressFile(file, q){
-    return new Promise((resolve, reject)=>{
-      const reader = new FileReader();
-      reader.onload = e=>{
-        const img = new Image();
-        img.onload = ()=>{
-          const c = document.createElement('canvas');
-          c.width = img.width; c.height = img.height;
-          const ctx = c.getContext('2d');
-          ctx.imageSmoothingEnabled = true;
-          ctx.drawImage(img, 0, 0);
-
-          // Auto format: keep PNG if it has transparency, else use JPEG for big savings
-          let mime = 'image/jpeg';
-          if (looksLikePNG(file) && canvasHasAlpha(ctx, c.width, c.height)) mime = 'image/png';
-
-          const qualityFloat = (mime === 'image/jpeg') ? (q/100) : undefined;
-
-          const finalize = (blob)=>{
-            if (!blob){
-              // Safari fallback
-              try {
-                const dataURL = c.toDataURL(mime, qualityFloat);
-                blob = dataURLToBlob(dataURL);
-              } catch(err){ return reject(err); }
-            }
-            resolve({ blob, width: img.width, height: img.height });
-          };
-
-          if (c.toBlob) c.toBlob(finalize, mime, qualityFloat);
-          else finalize(null);
-        };
-        img.onerror = reject;
-        img.src = e.target.result;
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-
-  async function handleCompress(){
-    if (!fileInput || !qualityEl || !out || !compressBtn) return;
-    const files = [...fileInput.files];
-    if (!files.length){ alert('Please choose at least one image.'); return; }
-
-    const q = parseInt(qualityEl.value, 10) || 75;
-
-    compressBtn.disabled = true; compressBtn.textContent = 'Processing…';
-    out.innerHTML = '';
-
-    for (const f of files){
-      try{
-        const before = f.size;
-        const res = await compressFile(f, q);
-        const url = URL.createObjectURL(res.blob);
-
-        const card = document.createElement('div');
-        card.className = 'thumb';
-        card.innerHTML = `
-          <img src="${url}" alt="Compressed preview">
-          <div class="meta">${safeName(f.name)} • ${res.width}×${res.height}</div>
-          <div class="meta">Before: ${prettyKB(before)} • After: ${prettyKB(res.blob.size)}</div>
-        `;
-        const a = document.createElement('a');
-        a.className = 'btn';
-        a.href = url;
-        a.download = 'compressed-' + safeName(f.name);
-        a.textContent = 'Download';
-        card.appendChild(a);
-
-        out.appendChild(card);
-      }catch(err){
-        console.error(err);
-        alert('Failed to compress: ' + f.name);
-      }
-    }
-
-    compressBtn.disabled = false; compressBtn.textContent = 'Compress & Download';
-  }
-
-  // (Re)wire the button
-  if (compressBtn) {
-    compressBtn.addEventListener('click', handleCompress);
-  }
-</script>
+</body>
+</html>
