@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="robots" content="index,follow"/>
 
   <!-- Primary Meta -->
   <title>Photo Compressor Pro – Compress Images Online (JPG/PNG/WebP)</title>
@@ -17,6 +18,7 @@
   <meta property="og:title" content="Photo Compressor Pro - Free Online Image Compression Tool">
   <meta property="og:description" content="Compress images online without losing quality. Free tool to reduce image size for faster uploads and better performance.">
   <meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+  <meta property="og:image:alt" content="PhotoCompressorPro - compress images online quickly and privately">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
@@ -25,11 +27,29 @@
   <meta name="twitter:description" content="Compress images online instantly with Photo Compressor Pro. Free, fast, and high-quality image compression without losing clarity.">
   <meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
 
+  <!-- Theming -->
+  <meta name="theme-color" content="#1f6fff"/>
+
   <!-- Favicon -->
   <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
 
+  <!-- Performance hint for AdSense -->
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+
   <!-- AdSense (verification/loader) -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9087913537288549" crossorigin="anonymous"></script>
+
+  <!-- Structured Data: Organization -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"PhotoCompressorPro",
+    "url":"https://www.photocompressorpro.com/",
+    "logo":"https://www.photocompressorpro.com/assets/og-image.png",
+    "sameAs":[]
+  }
+  </script>
 
   <style>
     :root{
@@ -105,10 +125,10 @@
 </head>
 <body>
   <!-- Header -->
-  <header class="site-header">
+  <header class="site-header" role="banner">
     <div class="nav-wrap">
-      <a class="brand" href="/">Photo<span class="accent">Compressor</span>Pro</a>
-      <nav>
+      <a class="brand" href="/" aria-label="PhotoCompressorPro Home">Photo<span class="accent">Compressor</span>Pro</a>
+      <nav aria-label="Primary">
         <a href="/">Home</a>
         <a href="tools/image-to-pdf.html">Image → PDF</a>
         <a href="tools/background-remover.html">Background Remover</a>
@@ -119,7 +139,7 @@
   </header>
 
   <!-- Main -->
-  <main>
+  <main id="main">
     <section class="card">
       <div class="hero">
         <h1>Compress Images Online (JPG/PNG)</h1>
@@ -133,33 +153,33 @@
       </div>
 
       <!-- Uploader -->
-      <div id="drop" class="uploader">
-        <div class="hint" id="fileStatus">No files selected</div>
+      <div id="drop" class="uploader" aria-label="Image uploader">
+        <div class="hint" id="fileStatus" aria-live="polite">No files selected</div>
 
         <div class="controls">
           <label class="btn secondary" for="fileInput">📁 Choose Images</label>
           <input id="fileInput" type="file" accept="image/*" multiple>
 
           <label class="quality-label" for="quality">Quality</label>
-          <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75">
+          <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75" aria-valuemin="40" aria-valuemax="95" aria-valuenow="75" aria-label="Compression quality">
           <span class="quality-value"><span id="qv">75</span>%</span>
 
-          <button id="compress" class="btn">Compress & Download</button>
+          <button id="compress" class="btn" aria-busy="false">Compress & Download</button>
         </div>
       </div>
 
       <!-- Results grid -->
-      <div id="out" class="output"></div>
+      <div id="out" class="output" aria-live="polite"></div>
 
-      <!-- FAQ Section (added) -->
-      <div style="margin-top:30px;padding:20px;background:#f9f9f9;border-radius:12px">
-        <h2 style="font-size:1.3rem;margin-bottom:10px">Frequently Asked Questions</h2>
+      <!-- FAQ Section -->
+      <section aria-labelledby="faq-heading" style="margin-top:30px;padding:20px;background:#f9f9f9;border-radius:12px">
+        <h2 id="faq-heading" style="font-size:1.3rem;margin-bottom:10px">Frequently Asked Questions</h2>
         <div>
           <p><strong>1. Will my images be uploaded?</strong><br>
           No. Everything runs locally in your browser. Your images never leave your device, ensuring privacy.</p>
 
           <p><strong>2. What formats are supported?</strong><br>
-          You can compress JPG, PNG, and WebP. PNGs with transparency are preserved automatically.</p>
+          JPG, PNG, and WebP. PNGs with transparency are preserved automatically.</p>
 
           <p><strong>3. What quality should I choose?</strong><br>
           70–80% is a great balance for most photos. For graphics or text, try a bit higher quality.</p>
@@ -167,15 +187,32 @@
           <p><strong>4. Can I compress multiple images at once?</strong><br>
           Yes. Use “Choose Images” to select multiple files and download each compressed result.</p>
         </div>
-      </div>
+      </section>
       <!-- /FAQ Section -->
-
     </section>
   </main>
 
-  <footer>
+  <footer role="contentinfo">
     © 2025 PhotoCompressorPro.com • <a href="privacy.html">Privacy</a> • <a href="about.html">About</a> • <a href="contact.html">Contact</a>
   </footer>
+
+  <noscript>
+    This site works best with JavaScript enabled. You can still visit our <a href="blog.html">Blog</a>, <a href="privacy.html">Privacy</a>, and <a href="contact.html">Contact</a> pages.
+  </noscript>
+
+  <!-- Structured Data: FAQ (matches on-page FAQ) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Will my images be uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser. Your images never leave your device, ensuring privacy."}},
+      {"@type":"Question","name":"What formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG, and WebP. PNGs with transparency are preserved automatically."}},
+      {"@type":"Question","name":"What quality should I choose?","acceptedAnswer":{"@type":"Answer","text":"70–80% is a great balance for most photos. For graphics or text, try a bit higher quality."}},
+      {"@type":"Question","name":"Can I compress multiple images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Use “Choose Images” to select multiple files and download each compressed result."}}
+    ]
+  }
+  </script>
 
   <script>
     // ===== Elements =====
@@ -244,7 +281,10 @@
       ['dragleave','drop'].forEach(evt=>{
         dropZone.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); dropZone.classList.remove('dragging'); });
       });
-      dropZone.addEventListener('drop', e => { if (fileInput) { fileInput.files = e.dataTransfer.files; updateSelectionUI(); } });
+      dropZone.addEventListener('drop', e => {
+        e.preventDefault();
+        if (fileInput) { fileInput.files = e.dataTransfer.files; updateSelectionUI(); }
+      });
     }
 
     // Core compression
@@ -292,7 +332,7 @@
       if (!files.length){ alert('Please choose at least one image.'); return; }
 
       const q = parseInt(qualityEl.value, 10) || 75;
-      compressBtn.disabled = true; compressBtn.textContent = 'Processing…';
+      compressBtn.disabled = true; compressBtn.setAttribute('aria-busy','true'); compressBtn.textContent = 'Processing…';
       out.innerHTML = '';
 
       for (const f of files){
@@ -322,7 +362,7 @@
         }
       }
 
-      compressBtn.disabled = false; compressBtn.textContent = 'Compress & Download';
+      compressBtn.disabled = false; compressBtn.setAttribute('aria-busy','false'); compressBtn.textContent = 'Compress & Download';
     }
 
     // Bindings
