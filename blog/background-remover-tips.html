@@ -3,10 +3,58 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
   <title>Quick Background Removal: Click + Tolerance (No Upload)</title>
   <meta name="description" content="Remove solid or near-solid backgrounds from images in your browser. Click to pick a color, adjust tolerance, and download a transparent PNG.">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://www.photocompressorpro.com/blog/background-remover-tips.html" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.photocompressorpro.com/blog/background-remover-tips.html">
+  <meta property="og:title" content="Quick Background Removal: Click + Tolerance (No Upload)">
+  <meta property="og:description" content="Remove solid or near-solid backgrounds directly in your browser. Pick a color, adjust tolerance, and export a transparent PNG.">
+  <meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Quick Background Removal: Click + Tolerance (No Upload)">
+  <meta name="twitter:description" content="Remove backgrounds in your browser and download a transparent PNG—free and private.">
+  <meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+
   <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="../style.css">
+
+  <!-- Structured data: Article -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Quick Background Removal: Click + Tolerance (No Upload)",
+    "description": "Remove solid or near-solid backgrounds from images in your browser and download a transparent PNG.",
+    "author": { "@type": "Person", "name": "Mac" },
+    "publisher": { "@type": "Organization", "name": "PhotoCompressorPro" },
+    "mainEntityOfPage": "https://www.photocompressorpro.com/blog/background-remover-tips.html",
+    "image": "https://www.photocompressorpro.com/assets/og-image.png",
+    "datePublished": "2025-01-01",
+    "dateModified": "2025-01-01"
+  }
+  </script>
+
+  <!-- Structured data: FAQ -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Will my image be uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser. Your image stays on your device."}},
+      {"@type":"Question","name":"What is tolerance?","acceptedAnswer":{"@type":"Answer","text":"Tolerance controls how many similar shades are removed. Higher values remove more background; lower values preserve more detail."}},
+      {"@type":"Question","name":"What images work best?","acceptedAnswer":{"@type":"Answer","text":"Photos with a solid or near-solid background (white, gray, etc.). For complex edges like hair, try clicking multiple spots and increasing tolerance."}}
+    ]
+  }
+  </script>
+
   <style>
     main{max-width:900px;margin:34px auto;padding:0 16px}
     article{background:#fff;border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.06);padding:24px}
@@ -15,18 +63,6 @@
     p,li{color:#334155}
     .cta{display:inline-block;margin-top:14px;padding:12px 16px;border-radius:10px;background:#1f6fff;color:#fff;font-weight:700;text-decoration:none}
   </style>
-  <!-- FAQ schema -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"FAQPage",
-    "mainEntity":[
-      {"@type":"Question","name":"Will my image be uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser. Your image stays on your device."}},
-      {"@type":"Question","name":"What is tolerance?","acceptedAnswer":{"@type":"Answer","text":"Tolerance controls how many similar shades are removed. Higher values remove more of the background; lower values keep more detail."}},
-      {"@type":"Question","name":"What images work best?","acceptedAnswer":{"@type":"Answer","text":"Photos with a solid or near-solid background (white, gray, etc.). For complex hair/fur, try increasing tolerance and clicking multiple background spots."}}
-    ]
-  }
-  </script>
 </head>
 <body>
 <header class="site-header">
@@ -36,6 +72,7 @@
       <a href="../index.html">Home</a>
       <a href="../tools/image-to-pdf.html">Image → PDF</a>
       <a href="../tools/background-remover.html">Background Remover</a>
+      <a href="../blog.html" class="active">Blog</a>
       <a href="../contact.html">Contact</a>
     </nav>
   </div>
