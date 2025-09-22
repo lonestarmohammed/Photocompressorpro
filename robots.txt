@@ -1,4 +1,19 @@
+# Applies to all crawlers
 User-agent: *
-Allow: /
 
+# Allow important sections
+Allow: /tools/
+Allow: /blog/
+
+# Block unimportant/system files
+Disallow: /assets/
+Disallow: /scripts/
+Disallow: /style.css
+Disallow: /tmp/
+Disallow: /private/
+
+# Block duplicate or unnecessary query parameter URLs (example if you use them)
+Disallow: /*?*
+
+# Sitemap location
 Sitemap: https://www.photocompressorpro.com/sitemap.xml
