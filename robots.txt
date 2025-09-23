@@ -4,16 +4,17 @@ User-agent: *
 # Allow important sections
 Allow: /tools/
 Allow: /blog/
+Allow: /assets/
+Allow: /scripts/
+Allow: /style.css
 
 # Block unimportant/system files
-Disallow: /assets/
-Disallow: /scripts/
-Disallow: /style.css
 Disallow: /tmp/
 Disallow: /private/
 
-# Block duplicate or unnecessary query parameter URLs (example if you use them)
-Disallow: /*?*
+# Block tracking or duplicate query parameters
+Disallow: /*?utm=*
+Disallow: /*?ref=*
 
 # Sitemap location
 Sitemap: https://www.photocompressorpro.com/sitemap.xml
