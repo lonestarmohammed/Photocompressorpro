@@ -33,6 +33,9 @@
     .hero{text-align:center;margin-bottom:14px}
     .hero h1{margin:0 0 6px;font-size:1.8rem}
     .hero p{margin:0;color:var(--muted)}
+    .tiny-links{margin-top:8px;font-size:.92rem}
+    .tiny-links a{color:#1f6fff;text-decoration:none}
+    .tiny-links a:hover{text-decoration:underline}
     .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}
     .btn{appearance:none;border:0;border-radius:12px;cursor:pointer;background:linear-gradient(90deg,#1f6fff,#00c2ff);color:#fff;padding:12px 18px;font-weight:700;box-shadow:0 10px 22px var(--ring)}
     .btn.secondary{background:#eef2ff;color:#1f3a8a;box-shadow:none}
@@ -49,6 +52,46 @@
 
   <!-- jsPDF (UMD build) -->
   <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+  <!-- SoftwareApplication schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Image to PDF Converter",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "url": "https://www.photocompressorpro.com/tools/image-to-pdf.html",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Convert multiple images (JPG, PNG, WebP) into a single PDF online. Private, fast, and watermark-free — runs in your browser.",
+    "featureList": [
+      "Merge multiple images into one PDF",
+      "A4/Letter + portrait/landscape",
+      "Contain/Cover/Width/Height fit modes",
+      "Local processing for privacy"
+    ],
+    "publisher": {
+      "@type": "Organization",
+      "name": "PhotoCompressorPro"
+    }
+  }
+  </script>
+
+  <!-- Breadcrumbs (optional but helpful) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.photocompressorpro.com/"},
+      {"@type":"ListItem","position":2,"name":"Image to PDF","item":"https://www.photocompressorpro.com/tools/image-to-pdf.html"}
+    ]
+  }
+  </script>
 </head>
 <body>
   <header class="site-header">
@@ -65,13 +108,18 @@
   <main>
     <section class="card">
       <div class="hero">
-        <h1>Image → PDF</h1>
+        <!-- Updated H1 -->
+        <h1>Free Image to PDF Converter (JPG/PNG/WebP)</h1>
         <p>Convert multiple images (JPG, PNG, WebP) into a single PDF instantly. Everything runs in your browser—no uploads, no watermarks. Perfect for homework scans, receipts, IDs, and sharing documents. Choose your images, reorder if needed, then create your PDF with one click.</p>
-        <ul>
+        <ul style="text-align:left;max-width:720px;margin:10px auto 0">
           <li><strong>Fast & private:</strong> Processing happens locally in your browser.</li>
           <li><strong>Multiple formats:</strong> JPG, PNG, WebP supported.</li>
           <li><strong>Multi-page PDFs:</strong> Combine several photos into one file.</li>
         </ul>
+        <!-- Tiny internal links for context -->
+        <div class="tiny-links">
+          Need to reduce file size first? Try our <a href="../index.html">Image Compressor</a>.
+        </div>
       </div>
 
       <div class="controls">
