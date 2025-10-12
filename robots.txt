@@ -1,18 +1,18 @@
 # Applies to all crawlers
 User-agent: *
 
-# Allow important sections
+# Allow important site sections
 Allow: /tools/
 Allow: /blog/
 Allow: /assets/
 Allow: /scripts/
 Allow: /style.css
 
-# Block unimportant/system files
+# Disallow sensitive or temporary paths
 Disallow: /tmp/
 Disallow: /private/
 
-# Block tracking or duplicate query parameters
+# Block unnecessary query parameter URLs
 Disallow: /*?utm=*
 Disallow: /*?ref=*
 
