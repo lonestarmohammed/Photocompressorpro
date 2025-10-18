@@ -39,9 +39,12 @@
   <url><loc>https://www.photocompressorpro.com/blog/image-compression-for-seo.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/blog/best-background-remover-for-product-photos.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/blog/best-settings-image-to-pdf.html</loc></url>
-  <url><loc>https://www.photocompressorpro.com/blog/wordpress-shopify-image-optimization.html</loc><changefreq>weekly</changefreq><priority>0.64</priority></url>
-  <url><loc>https://www.photocompressorpro.com/blog/jpg-png-webp-avif-which-to-use.html</loc><changefreq>weekly</changefreq><priority>0.64</priority></url>
-  <url><loc>https://www.photocompressorpro.com/blog/scan-to-pdf-with-phone.html</loc><changefreq>weekly</changefreq><priority>0.64</priority></url>
+  <url><loc>https://www.photocompressorpro.com/blog/wordpress-shopify-image-optimization.html</loc></url>
+  <url><loc>https://www.photocompressorpro.com/blog/jpg-png-webp-avif-which-to-use.html</loc></url>
+  <url><loc>https://www.photocompressorpro.com/blog/scan-to-pdf-with-phone.html</loc></url>
+
+  <!-- ✅ Missing blog added here -->
+  <url><loc>https://www.photocompressorpro.com/blog/best-free-image-compressor.html</loc></url>
 
   <!-- Other pages -->
   <url><loc>https://www.photocompressorpro.com/about.html</loc></url>
