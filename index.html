@@ -9,7 +9,7 @@
   <title>Photo Compressor Pro – Compress Images Online (JPG/PNG/WebP)</title>
   <meta name="description" content="Free online image compressor. Reduce JPG/PNG/WebP size without losing visible quality. Fast, secure, and runs in your browser.">
 
-  <!-- Canonical: prefer WWW root (avoids /index.html duplicate) -->
+  <!-- Canonical -->
   <link rel="canonical" href="https://www.photocompressorpro.com/"/>
 
   <!-- Open Graph -->
@@ -30,29 +30,24 @@
   <!-- Theming -->
   <meta name="theme-color" content="#1f6fff"/>
 
-  <!-- Favicons / PWA (keep as you had) -->
+  <!-- Favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
-  <link rel="icon" href="assets/favicon.ico" sizes="any">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
   <link rel="manifest" href="assets/site.webmanifest">
   <meta name="msapplication-TileColor" content="#1f6fff">
 
-  <!-- Performance hint for AdSense -->
-  <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
-
   <!-- AdSense -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9087913537288549" crossorigin="anonymous"></script>
 
-  <!-- Organization Schema -->
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"Organization",
     "name":"PhotoCompressorPro",
     "url":"https://www.photocompressorpro.com/",
-    "logo":"https://www.photocompressorpro.com/assets/og-image.png",
-    "sameAs":[]
+    "logo":"https://www.photocompressorpro.com/assets/og-image.png"
   }
   </script>
 
@@ -89,6 +84,7 @@
     footer{margin:30px 0 24px;text-align:center;color:var(--muted);font-size:.9rem}
   </style>
 </head>
+
 <body>
   <header class="site-header" role="banner">
     <div class="nav-wrap">
@@ -108,143 +104,132 @@
       <div class="hero">
         <h1>Compress Images Online (JPG/PNG)</h1>
         <p>PhotoCompressorPro is a fast, free, and privacy-friendly image compression tool that reduces file size without hurting quality.</p>
-        <p>Everything happens <strong>in your browser</strong>—no uploads. Choose images, adjust quality, preview, and download in seconds.</p>
-        <ul>
-          <li><strong>Fast & private:</strong> No servers, no watermarks, no sign-up.</li>
-          <li><strong>Multiple formats:</strong> JPG, PNG, WebP supported.</li>
-          <li><strong>Save storage & boost speed:</strong> Compress once, use everywhere.</li>
-        </ul>
+        <p>Everything happens <strong>in your browser</strong> — no uploads. Choose images, adjust quality, preview, and download in seconds.</p>
       </div>
 
       <!-- Uploader -->
-      <div id="drop" class="uploader" aria-label="Image uploader">
-        <div class="hint" id="fileStatus" aria-live="polite">No files selected</div>
+      <div id="drop" class="uploader">
+        <div class="hint" id="fileStatus">No files selected</div>
 
         <div class="controls">
           <label class="btn secondary" for="fileInput">📁 Choose Images</label>
           <input id="fileInput" type="file" accept="image/*" multiple>
 
-          <label class="quality-label" for="quality">Quality</label>
-          <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75" aria-valuemin="40" aria-valuemax="95" aria-valuenow="75" aria-label="Compression quality">
+          <label for="quality">Quality</label>
+          <input id="quality" class="quality-range" type="range" min="40" max="95" step="1" value="75">
           <span class="quality-value"><span id="qv">75</span>%</span>
 
-          <button id="compress" class="btn" aria-busy="false">Compress & Download</button>
+          <button id="compress" class="btn">Compress & Download</button>
         </div>
       </div>
 
-      <!-- Results grid -->
-      <div id="out" class="output" aria-live="polite"></div>
-
-      <!-- FAQ -->
-      <section aria-labelledby="faq-heading" style="margin-top:30px;padding:20px;background:#f9f9f9;border-radius:12px">
-        <h2 id="faq-heading" style="font-size:1.3rem;margin-bottom:10px">Frequently Asked Questions</h2>
-        <div>
-          <p><strong>1. Will my images be uploaded?</strong><br>No. Everything runs locally in your browser.</p>
-          <p><strong>2. What formats are supported?</strong><br>JPG, PNG, and WebP.</p>
-          <p><strong>3. What quality should I choose?</strong><br>70–80% suits most photos.</p>
-          <p><strong>4. Can I compress multiple images at once?</strong><br>Yes—select many and download each result.</p>
-        </div>
-
-        <!-- Related Tools -->
-        <section style="margin-top:40px;padding:24px;background:#f9f9f9;border-radius:12px">
-          <h2 style="font-size:1.4rem;margin-bottom:16px">Explore More Free Tools</h2>
-          <ul style="list-style:none;padding:0;display:grid;gap:14px">
-            <li><a href="tools/image-to-pdf.html" style="text-decoration:none;color:#1f6fff;font-weight:600">📄 Image → PDF Converter</a> – Merge JPG/PNG/WebP into one PDF.</li>
-            <li><a href="tools/background-remover.html" style="text-decoration:none;color:#1f6fff;font-weight:600">🎨 AI Background Remover</a> – Erase backgrounds instantly.</li>
-            <li><a href="blog.html" style="text-decoration:none;color:#1f6fff;font-weight:600">✍️ Read Our Blog</a> – Guides and tips.</li>
-          </ul>
-        </section>
-      </section>
+      <div id="out" class="output"></div>
     </section>
   </main>
 
-  <footer role="contentinfo">
-    © 2025 PhotoCompressorPro.com • <a href="privacy.html">Privacy</a> • <a href="about.html">About</a> • <a href="contact.html">Contact</a>
-  </footer>
-
-  <noscript>This site works best with JavaScript enabled. You can still visit our <a href="blog.html">Blog</a>, <a href="privacy.html">Privacy</a>, and <a href="contact.html">Contact</a> pages.</noscript>
-
-  <!-- FAQ Schema -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-    {"@type":"Question","name":"Will my images be uploaded?","acceptedAnswer":{"@type":"Answer","text":"No. Everything runs locally in your browser."}},
-    {"@type":"Question","name":"What formats are supported?","acceptedAnswer":{"@type":"Answer","text":"JPG, PNG, and WebP."}},
-    {"@type":"Question","name":"What quality should I choose?","acceptedAnswer":{"@type":"Answer","text":"70–80% suits most photos."}},
-    {"@type":"Question","name":"Can I compress multiple images at once?","acceptedAnswer":{"@type":"Answer","text":"Yes—select many and download each result."}}
-  ]}
-  </script>
+  <footer>© 2025 PhotoCompressorPro.com • <a href="privacy.html">Privacy</a> • <a href="about.html">About</a> • <a href="contact.html">Contact</a></footer>
 
   <script>
-    const fileInput=document.getElementById('fileInput');
-    const qualityEl=document.getElementById('quality');
-    const qv=document.getElementById('qv');
-    const compressBtn=document.getElementById('compress');
-    const out=document.getElementById('out');
-    const dropZone=document.getElementById('drop');
-    const statusEl=document.getElementById('fileStatus');
-
-    function prettyBytes(b){if(b<1024)return b+' B';const kb=b/1024;if(kb<1024)return Math.round(kb)+' KB';const mb=kb/1024;return (Math.round(mb*10)/10)+' MB'}
-    function safeName(n){return n.replace(/[^\w.\-]+/g,'-')}
-    function looksLikePNG(f){return (f.type&&f.type.toLowerCase().includes('png'))||/\.png$/i.test(f.name)}
-    function dataURLToBlob(u){const [m,b64]=u.split(',');const mime=(m.match(/:(.*?);/)||[])[1]||'application/octet-stream';const bin=atob(b64);const buf=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)buf[i]=bin.charCodeAt(i);return new Blob([buf],{type:mime})}
-    function canvasHasAlpha(ctx,w,h,step=12){try{const d=ctx.getImageData(0,0,w,h).data;for(let y=0;y<h;y+=step){for(let x=0;x<w;x+=step){if(d[(y*w+x)*4+3]<255)return true}}}catch(e){}return false}
-
-    function updateSelectionUI(){
-      const files=[...(fileInput?.files||[])];
-      if(!files.length){statusEl.textContent='No files selected';return}
-      if(files.length===1){statusEl.textContent=`Selected: ${files[0].name} — ${prettyBytes(files[0].size)}`}
-      else{const total=files.reduce((s,f)=>s+f.size,0);statusEl.textContent=`Selected: ${files.length} files — ${prettyBytes(total)} total`}
+  // universal iOS-safe blob downloader
+  function safeDownloadBlob(blob, name) {
+    name = fixFilenameExtension(name, blob.type);
+    const url = URL.createObjectURL(blob);
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    if (isIOS) {
+      const a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(()=>window.open(url,'_blank'),500);
+      setTimeout(()=>URL.revokeObjectURL(url),2000);
+      return;
     }
-    function syncQuality(){qv.textContent=qualityEl.value}
+    const a = document.createElement('a');
+    a.href = url; a.download = name; a.style.display='none';
+    document.body.appendChild(a); a.click();
+    setTimeout(()=>{URL.revokeObjectURL(url);a.remove();},1200);
+  }
+  function fixFilenameExtension(name,mime){
+    const ext = (name.split('.').pop()||'').toLowerCase();
+    const want = mime.includes('png')?'png':mime.includes('webp')?'webp':mime.includes('jpeg')?'jpg':'bin';
+    return name.endsWith('.'+want)?name:name.replace(/\.[^.]+$/,'')+'.'+want;
+  }
 
-    if(dropZone){
-      ['dragenter','dragover'].forEach(evt=>dropZone.addEventListener(evt,e=>{e.preventDefault();e.stopPropagation();dropZone.classList.add('dragging')}))
-      ;['dragleave','drop'].forEach(evt=>dropZone.addEventListener(evt,e=>{e.preventDefault();e.stopPropagation();dropZone.classList.remove('dragging')}))
-      dropZone.addEventListener('drop',e=>{e.preventDefault();fileInput.files=e.dataTransfer.files;updateSelectionUI()})
-    }
+  const fileInput=document.getElementById('fileInput');
+  const qualityEl=document.getElementById('quality');
+  const qv=document.getElementById('qv');
+  const compressBtn=document.getElementById('compress');
+  const out=document.getElementById('out');
+  const dropZone=document.getElementById('drop');
+  const statusEl=document.getElementById('fileStatus');
 
-    function compressFile(file,q){
-      return new Promise((resolve,reject)=>{
-        const reader=new FileReader();
-        reader.onload=e=>{
-          const img=new Image();
-          img.onload=()=>{
-            const c=document.createElement('canvas');c.width=img.width;c.height=img.height;
-            const ctx=c.getContext('2d');ctx.imageSmoothingEnabled=true;ctx.drawImage(img,0,0);
-            let mime='image/jpeg'; if(looksLikePNG(file)&&canvasHasAlpha(ctx,c.width,c.height)) mime='image/png';
-            const qf=(mime==='image/jpeg')?(q/100):undefined;
-            const finalize=(blob)=>{
-              if(!blob){try{const d=c.toDataURL(mime,qf);blob=dataURLToBlob(d)}catch(err){return reject(err)}}
-              resolve({blob,width:img.width,height:img.height,name:file.name})
-            };
-            if(c.toBlob) c.toBlob(finalize,mime,qf); else finalize(null);
-          };
-          img.onerror=reject; img.src=e.target.result;
+  function prettyBytes(b){if(b<1024)return b+' B';const kb=b/1024;if(kb<1024)return Math.round(kb)+' KB';const mb=kb/1024;return (Math.round(mb*10)/10)+' MB'}
+  function safeName(n){return n.replace(/[^\w.\-]+/g,'-')}
+  function looksLikePNG(f){return (f.type&&f.type.toLowerCase().includes('png'))||/\.png$/i.test(f.name)}
+  function dataURLToBlob(u){const [m,b64]=u.split(',');const mime=(m.match(/:(.*?);/)||[])[1]||'application/octet-stream';const bin=atob(b64);const buf=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)buf[i]=bin.charCodeAt(i);return new Blob([buf],{type:mime})}
+  function canvasHasAlpha(ctx,w,h,step=12){try{const d=ctx.getImageData(0,0,w,h).data;for(let y=0;y<h;y+=step){for(let x=0;x<w;x+=step){if(d[(y*w+x)*4+3]<255)return true}}}catch(e){}return false}
+
+  function updateSelectionUI(){
+    const files=[...(fileInput?.files||[])];
+    if(!files.length){statusEl.textContent='No files selected';return}
+    if(files.length===1){statusEl.textContent=`Selected: ${files[0].name} — ${prettyBytes(files[0].size)}`}
+    else{const total=files.reduce((s,f)=>s+f.size,0);statusEl.textContent=`Selected: ${files.length} files — ${prettyBytes(total)} total`}
+  }
+  function syncQuality(){qv.textContent=qualityEl.value}
+  ['dragenter','dragover'].forEach(evt=>dropZone.addEventListener(evt,e=>{e.preventDefault();dropZone.classList.add('dragging')}));
+  ['dragleave','drop'].forEach(evt=>dropZone.addEventListener(evt,e=>{e.preventDefault();dropZone.classList.remove('dragging')}));
+  dropZone.addEventListener('drop',e=>{e.preventDefault();fileInput.files=e.dataTransfer.files;updateSelectionUI()});
+
+  function compressFile(file,q){
+    return new Promise((resolve,reject)=>{
+      const reader=new FileReader();
+      reader.onload=e=>{
+        const img=new Image();
+        img.onload=()=>{
+          const c=document.createElement('canvas');
+          c.width=img.width;c.height=img.height;
+          const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+          let mime='image/jpeg';
+          if(looksLikePNG(file)&&canvasHasAlpha(ctx,c.width,c.height)) mime='image/png';
+          const qf=(mime==='image/jpeg')?(q/100):undefined;
+          c.toBlob(blob=>{
+            if(!blob){try{blob=dataURLToBlob(c.toDataURL(mime,qf))}catch(err){reject(err);return}}
+            resolve({blob,width:img.width,height:img.height,name:file.name});
+          },mime,qf);
         };
-        reader.onerror=reject; reader.readAsDataURL(file);
-      })
-    }
+        img.onerror=reject; img.src=e.target.result;
+      };
+      reader.onerror=reject; reader.readAsDataURL(file);
+    });
+  }
 
-    async function handleCompress(){
-      const files=[...(fileInput?.files||[])]; if(!files.length){alert('Please choose at least one image.');return}
-      const q=parseInt(qualityEl.value,10)||75;
-      compressBtn.disabled=true; compressBtn.setAttribute('aria-busy','true'); compressBtn.textContent='Processing…';
-      out.innerHTML='';
-      for(const f of files){
-        try{
-          const before=f.size; const res=await compressFile(f,q); const url=URL.createObjectURL(res.blob);
-          const card=document.createElement('div'); card.className='thumb';
-          card.innerHTML=`<img src="${url}" alt="Compressed preview"><div class="meta">${safeName(res.name)} • ${res.width}×${res.height}</div><div class="meta">Before: ${prettyBytes(before)} • After: ${prettyBytes(res.blob.size)}</div>`;
-          const a=document.createElement('a'); a.className='btn'; a.href=url; a.download='compressed-'+safeName(res.name); a.textContent='Download'; card.appendChild(a);
-          out.appendChild(card);
-        }catch(err){console.error(err); alert('Failed to compress: '+f.name)}
-      }
-      compressBtn.disabled=false; compressBtn.setAttribute('aria-busy','false'); compressBtn.textContent='Compress & Download';
+  async function handleCompress(){
+    const files=[...(fileInput?.files||[])];
+    if(!files.length){alert('Please choose at least one image.');return}
+    const q=parseInt(qualityEl.value,10)||75;
+    compressBtn.disabled=true; compressBtn.textContent='Processing…';
+    out.innerHTML='';
+    for(const f of files){
+      try{
+        const before=f.size;
+        const res=await compressFile(f,q);
+        const card=document.createElement('div');card.className='thumb';
+        const url=URL.createObjectURL(res.blob);
+        card.innerHTML=`<img src="${url}" alt="Compressed preview"><div class="meta">${safeName(res.name)} • ${res.width}×${res.height}</div><div class="meta">Before: ${prettyBytes(before)} • After: ${prettyBytes(res.blob.size)}</div>`;
+        const btn=document.createElement('button');
+        btn.className='btn';btn.textContent='Download';
+        btn.onclick=()=>safeDownloadBlob(res.blob,'compressed-'+safeName(res.name));
+        card.appendChild(btn);
+        out.appendChild(card);
+      }catch(err){console.error(err);alert('Failed to compress: '+f.name)}
     }
+    compressBtn.disabled=false; compressBtn.textContent='Compress & Download';
+  }
 
-    fileInput.addEventListener('change',updateSelectionUI);
-    qualityEl.addEventListener('input',syncQuality); qualityEl.addEventListener('change',syncQuality); syncQuality();
-    compressBtn.addEventListener('click',handleCompress);
+  fileInput.addEventListener('change',updateSelectionUI);
+  qualityEl.addEventListener('input',syncQuality);
+  compressBtn.addEventListener('click',handleCompress);
+  syncQuality();
   </script>
 </body>
 </html>
