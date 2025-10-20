@@ -1,31 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
-  <!-- Homepage -->
-  <url>
-    <loc>https://www.photocompressorpro.com/</loc>
-    <priority>1.0</priority>
-    <changefreq>daily</changefreq>
-  </url>
+  <url><loc>https://www.photocompressorpro.com/</loc><priority>1.0</priority><changefreq>daily</changefreq></url>
 
   <!-- Tools -->
-  <url>
-    <loc>https://www.photocompressorpro.com/tools/image-to-pdf.html</loc>
-    <priority>0.9</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://www.photocompressorpro.com/tools/background-remover.html</loc>
-    <priority>0.9</priority>
-    <changefreq>weekly</changefreq>
-  </url>
+  <url><loc>https://www.photocompressorpro.com/tools/image-to-pdf.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
+  <url><loc>https://www.photocompressorpro.com/tools/background-remover.html</loc><priority>0.9</priority><changefreq>weekly</changefreq></url>
 
   <!-- Blog index -->
-  <url>
-    <loc>https://www.photocompressorpro.com/blog.html</loc>
-    <priority>0.8</priority>
-    <changefreq>weekly</changefreq>
-  </url>
+  <url><loc>https://www.photocompressorpro.com/blog.html</loc><priority>0.8</priority><changefreq>weekly</changefreq></url>
 
   <!-- Blog posts -->
   <url><loc>https://www.photocompressorpro.com/blog/image-compressor-guide.html</loc></url>
@@ -45,13 +27,10 @@
   <url><loc>https://www.photocompressorpro.com/blog/reduce-photo-size-for-email.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/blog/make-multi-page-pdf-from-photos-mobile.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/blog/remove-background-from-car-photos.html</loc></url>
-
-  <!-- ✅ Missing blog added here -->
   <url><loc>https://www.photocompressorpro.com/blog/best-free-image-compressor.html</loc></url>
 
   <!-- Other pages -->
   <url><loc>https://www.photocompressorpro.com/about.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/contact.html</loc></url>
   <url><loc>https://www.photocompressorpro.com/privacy.html</loc></url>
-
 </urlset>
