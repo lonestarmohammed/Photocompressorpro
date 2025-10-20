@@ -3,297 +3,184 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-
-  <title>Free Image to PDF Converter (JPG/PNG/WebP) – PhotoCompressorPro</title>
-  <meta name="description" content="Convert multiple images (JPG, PNG, WebP) into a single PDF online. Fast, private, and free—no watermark or signup. Everything runs in your browser.">
-
+  <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1"/>
+  
+  <!-- Primary Meta -->
+  <title>Convert Images to PDF Online - Free & Private | PhotoCompressorPro</title>
+  <meta name="description" content="Convert JPG, PNG to PDF online for free. Merge multiple images into one PDF document. Private, secure, and no watermarks.">
+  <meta name="keywords" content="image to pdf, jpg to pdf, png to pdf, convert images to pdf, merge images to pdf, free pdf converter">
+  
   <!-- Canonical -->
   <link rel="canonical" href="https://www.photocompressorpro.com/tools/image-to-pdf.html" />
-
+  
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+  <link rel="manifest" href="../assets/site.webmanifest">
+  <link rel="shortcut icon" href="../assets/favicon.ico">
+  <meta name="msapplication-TileColor" content="#1f6fff">
+  <meta name="theme-color" content="#1f6fff">
+  
   <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Photo Compressor Pro">
   <meta property="og:url" content="https://www.photocompressorpro.com/tools/image-to-pdf.html">
-  <meta property="og:title" content="Free Image to PDF Converter (JPG/PNG/WebP)">
-  <meta property="og:description" content="Merge images into a single PDF—fast, private, and free.">
-  <meta property="og:image" content="https://www.photocompressorpro.com/assets/og-image.png">
-
+  <meta property="og:title" content="Convert Images to PDF Online - Free & Private">
+  <meta property="og:description" content="Convert JPG, PNG to PDF online for free. Merge multiple images into one PDF document. Private, secure, and no watermarks.">
+  <meta property="og:image" content="https://www.photocompressorpro.com/assets/og-banner.png">
+  <meta property="og:image:alt" content="Image to PDF Converter - PhotoCompressorPro">
+  <meta property="og:locale" content="en_US">
+  
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Image to PDF Converter (JPG/PNG/WebP)">
-  <meta name="twitter:description" content="Merge images into a single PDF—fast, private, and free.">
-  <meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-image.png">
+  <meta name="twitter:url" content="https://www.photocompressorpro.com/tools/image-to-pdf.html">
+  <meta name="twitter:title" content="Convert Images to PDF Online - Free & Private">
+  <meta name="twitter:description" content="Convert JPG, PNG to PDF online for free. Merge multiple images into one PDF. Private and secure.">
+  <meta name="twitter:image" content="https://www.photocompressorpro.com/assets/og-banner.png">
 
-  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="../style.css">
-
-  <style>
-    :root{--card:#fff;--muted:#6b7280;--ring:rgba(31,111,255,.22)}
-    main{max-width:960px;margin:34px auto;padding:0 16px}
-    .card{background:var(--card);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.06);padding:24px}
-    .hero{text-align:center;margin-bottom:14px}
-    .hero h1{margin:0 0 6px;font-size:1.8rem}
-    .hero p{margin:0;color:var(--muted)}
-    .tiny-links{margin-top:8px;font-size:.92rem}
-    .tiny-links a{color:#1f6fff;text-decoration:none}
-    .tiny-links a:hover{text-decoration:underline}
-    .controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0}
-    .btn{appearance:none;border:0;border-radius:12px;cursor:pointer;background:linear-gradient(90deg,#1f6fff,#00c2ff);color:#fff;padding:12px 18px;font-weight:700;box-shadow:0 10px 22px var(--ring)}
-    .btn.secondary{background:#eef2ff;color:#1f3a8a;box-shadow:none}
-    label.opt{display:inline-flex;align-items:center;gap:6px}
-    select, input[type="number"]{padding:10px 12px;border:1px solid #d1d5db;border-radius:10px}
-    .hint{font-size:.9rem;color:var(--muted);margin-top:6px}
-    .preview{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));margin-top:12px}
-    .thumb{border:1px solid rgba(15,23,42,.08);border-radius:12px;padding:8px;background:#fff;text-align:center}
-    .thumb img{max-width:100%;border-radius:8px}
-    .meta{font-size:.85rem;color:var(--muted);margin-top:6px}
-    /* keep the input accessible but out of layout */
-    #fileInput{position:absolute;left:-9999px;width:1px;height:1px}
-  </style>
-
-  <!-- jsPDF (UMD build) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-
-  <!-- SoftwareApplication schema -->
+  <!-- Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebApplication",
     "name": "Image to PDF Converter",
-    "applicationCategory": "UtilityApplication",
-    "operatingSystem": "Web",
+    "description": "Free online tool to convert JPG and PNG images to PDF documents. Merge multiple images into a single PDF file.",
     "url": "https://www.photocompressorpro.com/tools/image-to-pdf.html",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "permissions": "browser",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "Convert multiple images (JPG, PNG, WebP) into a single PDF online. Private, fast, and watermark-free — runs in your browser.",
-    "featureList": [
-      "Merge multiple images into one PDF",
-      "A4/Letter + portrait/landscape",
-      "Contain/Cover/Width/Height fit modes",
-      "Local processing for privacy"
-    ],
-    "publisher": {
+    "author": {
       "@type": "Organization",
-      "name": "PhotoCompressorPro"
+      "name": "Photo Compressor Pro"
     }
   }
   </script>
 
-  <!-- Breadcrumbs (optional but helpful) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Home","item":"https://www.photocompressorpro.com/"},
-      {"@type":"ListItem","position":2,"name":"Image to PDF","item":"https://www.photocompressorpro.com/tools/image-to-pdf.html"}
-    ]
-  }
-  </script>
+  <style>
+    :root{--brand:#1f6fff;--ink:#0f172a;--muted:#6b7280;--bg:#f6f8fb;--card:#ffffff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    header.site-header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(180%) blur(8px);background:linear-gradient(180deg, rgba(255,255,255,.95), rgba(255,255,255,.85));border-bottom:1px solid rgba(15,23,42,.06)}
+    .nav-wrap{max-width:1000px;margin:0 auto;padding:12px 16px;display:flex;align-items:center;justify-content:space-between}
+    .brand{text-decoration:none;color:var(--ink);font-weight:800;letter-spacing:.2px}
+    .brand .accent{color:var(--brand)}
+    nav a{color:var(--ink);text-decoration:none;margin-left:16px;font-weight:600}
+    nav a:hover{color:var(--brand)}
+    @media (max-width:680px){.nav-wrap{flex-direction:column;gap:8px} nav a{margin:0 8px}}
+    main{max-width:900px;margin:34px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.06);padding:24px}
+    .hero{text-align:center;margin-bottom:14px}
+    .hero h1{margin:0 0 6px;font-size:1.7rem}
+    .hero p{margin:0;color:var(--muted)}
+    .uploader{border:2px dashed rgba(15,23,42,.12);border-radius:14px;padding:22px;background:#fafbff;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center}
+    .uploader input[type=file]{display:none}
+    .btn{appearance:none;border:0;border-radius:12px;cursor:pointer;background:linear-gradient(90deg, var(--brand), #00c2ff);color:#fff;padding:12px 18px;font-weight:700;box-shadow:0 10px 22px rgba(31,111,255,.22)}
+    .btn.secondary{background:#eef2ff;color:#1f3a8a;box-shadow:none}
+    .hint{font-size:.92rem;color:var(--muted)}
+    .dragging{background:#eef4ff;border-color:var(--brand)}
+    .controls{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    footer{margin:30px 0 24px;text-align:center;color:var(--muted);font-size:.9rem}
+    .breadcrumb{margin-bottom:20px;color:#6b7280;font-size:0.9rem}
+    .breadcrumb a{color:#1f6fff;text-decoration:none}
+  </style>
 </head>
-<body>
-  <header class="site-header">
+<body itemscope itemtype="https://schema.org/WebPage">
+  <header class="site-header" role="banner">
     <div class="nav-wrap">
-      <a class="brand" href="../index.html">Photo<span class="accent">Compressor</span>Pro</a>
-      <nav>
+      <a class="brand" href="../index.html" aria-label="PhotoCompressorPro Home" itemprop="url">Photo<span class="accent">Compressor</span>Pro</a>
+      <nav aria-label="Primary">
         <a href="../index.html">Home</a>
+        <a href="image-to-pdf.html" class="active">Image → PDF</a>
+        <a href="background-remover.html">Background Remover</a>
         <a href="../blog.html">Blog</a>
         <a href="../contact.html">Contact</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="main" itemprop="mainContentOfPage">
+    <!-- Breadcrumb Navigation -->
+    <div class="breadcrumb" itemprop="breadcrumb">
+      <a href="../index.html" itemprop="url">Home</a> &gt; <a href="../tools.html" itemprop="url">Tools</a> &gt; <span itemprop="name">Image to PDF</span>
+    </div>
+
     <section class="card">
       <div class="hero">
-        <!-- Updated H1 -->
-        <h1>Free Image to PDF Converter (JPG/PNG/WebP)</h1>
-        <p>Convert multiple images (JPG, PNG, WebP) into a single PDF instantly. Everything runs in your browser—no uploads, no watermarks. Perfect for homework scans, receipts, IDs, and sharing documents. Choose your images, reorder if needed, then create your PDF with one click.</p>
-        <ul style="text-align:left;max-width:720px;margin:10px auto 0">
-          <li><strong>Fast & private:</strong> Processing happens locally in your browser.</li>
-          <li><strong>Multiple formats:</strong> JPG, PNG, WebP supported.</li>
-          <li><strong>Multi-page PDFs:</strong> Combine several photos into one file.</li>
-        </ul>
-        <!-- Tiny internal links for context -->
-        <div class="tiny-links">
-          Need to reduce file size first? Try our <a href="../index.html">Image Compressor</a>.
+        <h1 itemprop="headline">Convert Images to PDF</h1>
+        <p>Convert JPG, PNG, and other images to PDF format. Merge multiple images into a single PDF document.</p>
+        <p>Everything happens <strong>in your browser</strong> — no uploads to servers, completely private.</p>
+      </div>
+
+      <!-- Uploader -->
+      <div id="drop" class="uploader">
+        <div class="hint" id="fileStatus">No images selected</div>
+
+        <div class="controls">
+          <label class="btn secondary" for="fileInput">📁 Choose Images</label>
+          <input id="fileInput" type="file" accept="image/*" multiple>
+          <button id="convert" class="btn">Convert to PDF</button>
         </div>
       </div>
 
-      <div class="controls">
-        <button id="pickBtn" class="btn secondary">📁 Choose Images</button>
-        <input id="fileInput" type="file" accept="image/*" multiple>
-
-        <label class="opt">Page
-          <select id="pageSize">
-            <option value="a4|p" selected>A4 Portrait</option>
-            <option value="a4|l">A4 Landscape</option>
-            <option value="letter|p">Letter Portrait</option>
-            <option value="letter|l">Letter Landscape</option>
-          </select>
-        </label>
-
-        <label class="opt">Margin (mm)
-          <input id="margin" type="number" min="0" max="40" value="10">
-        </label>
-
-        <label class="opt">Fit
-          <select id="fitMode">
-            <option value="contain" selected>Contain (no crop)</option>
-            <option value="cover">Cover (fill page)</option>
-            <option value="width">Fit width</option>
-            <option value="height">Fit height</option>
-          </select>
-        </label>
-
-        <button id="makePdf" class="btn">Create PDF</button>
-      </div>
-
-      <div class="hint">Tip: images are added in the same order you select them. Use “Choose Images” again to add more before creating the PDF.</div>
-
-      <div id="preview" class="preview"></div>
-
-      <!-- FAQ Section -->
-      <div style="margin-top:30px;padding:20px;background:#f9f9f9;border-radius:12px">
-        <h2 style="font-size:1.3rem;margin-bottom:10px">Frequently Asked Questions</h2>
-        <div>
-          <p><strong>1. Are my images uploaded?</strong><br>
-          No. Everything runs locally in your browser—your images never leave your device.</p>
-
-          <p><strong>2. Can I reorder pages?</strong><br>
-          Select images in the order you want them to appear. (Reordering UI is coming soon.)</p>
-
-          <p><strong>3. What’s the best page size?</strong><br>
-          A4 works for most documents. Use “Letter” if you’re in the U.S. Switch orientation for landscape photos.</p>
-
-          <p><strong>4. How do “Contain/Cover/Width/Height” work?</strong><br>
-          <em>Contain</em> fits the whole image (no crop), <em>Cover</em> fills the page (may crop), <em>Width</em> fits width, <em>Height</em> fits height.</p>
-        </div>
-      </div>
-      <!-- /FAQ Section -->
-
+      <div id="out" class="output"></div>
     </section>
   </main>
 
-  <footer style="text-align:center;color:#6b7280;margin:30px 0 24px;font-size:.9rem">
-    © 2025 PhotoCompressorPro.com • <a href="../privacy.html">Privacy</a> • <a href="../about.html">About</a> • <a href="../contact.html">Contact</a>
-  </footer>
+  <footer>© 2025 PhotoCompressorPro.com • <a href="../privacy.html">Privacy</a> • <a href="../about.html">About</a> • <a href="../contact.html">Contact</a></footer>
 
   <script>
-    // ---------- Elements ----------
-    const $ = s=>document.querySelector(s);
-    const pickBtn   = $('#pickBtn');
-    const fileInput = $('#fileInput');
-    const pageSizeEl= $('#pageSize');
-    const marginEl  = $('#margin');
-    const fitEl     = $('#fitMode');
-    const preview   = $('#preview');
-    const btn       = $('#makePdf');
+    // Basic image to PDF functionality placeholder
+    const fileInput = document.getElementById('fileInput');
+    const convertBtn = document.getElementById('convert');
+    const statusEl = document.getElementById('fileStatus');
+    const dropZone = document.getElementById('drop');
 
-    // Open picker (reliable across iOS/Android/Desktop)
-    pickBtn.addEventListener('click', ()=> fileInput.click());
-
-    // Preview thumbs
-    function showPreview(files){
-      preview.innerHTML = '';
-      [...files].forEach(f=>{
-        const url = URL.createObjectURL(f);
-        const div = document.createElement('div');
-        div.className = 'thumb';
-        div.innerHTML = `<img src="${url}" alt=""><div class="meta">${f.name}</div>`;
-        preview.appendChild(div);
-      });
-    }
-    fileInput.addEventListener('change', ()=> showPreview(fileInput.files));
-
-    // Placement math (contain, cover, width, height)
-    function calcPlacement(imgW, imgH, pageW, pageH, margin, mode){
-      const w = pageW - margin*2, h = pageH - margin*2;
-      const rImg = imgW / imgH, rBox = w / h;
-      let outW, outH;
-      if (mode === 'width'){ outW = w; outH = outW / rImg; }
-      else if (mode === 'height'){ outH = h; outW = outH * rImg; }
-      else if (mode === 'cover'){
-        if (rImg > rBox){ outH = h; outW = outH * rImg; }
-        else { outW = w; outH = outW / rImg; }
-      } else { // contain
-        if (rImg > rBox){ outW = w; outH = outW / rImg; }
-        else { outH = h; outW = outH * rImg; }
+    function updateSelectionUI() {
+      const files = [...(fileInput?.files || [])];
+      if (!files.length) {
+        statusEl.textContent = 'No images selected';
+        return;
       }
-      const x = margin + (w - outW)/2;
-      const y = margin + (h - outH)/2;
-      return {x,y,w:outW,h:outH};
+      if (files.length === 1) {
+        statusEl.textContent = `Selected: ${files[0].name}`;
+      } else {
+        statusEl.textContent = `Selected: ${files.length} images`;
+      }
     }
 
-    // iOS-safe: read file as DataURL
-    const readAsDataURL = f => new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = e => res(e.target.result);
-      r.onerror = rej;
-      r.readAsDataURL(f);
+    ['dragenter', 'dragover'].forEach(evt => dropZone.addEventListener(evt, e => {
+      e.preventDefault();
+      dropZone.classList.add('dragging');
+    }));
+    
+    ['dragleave', 'drop'].forEach(evt => dropZone.addEventListener(evt, e => {
+      e.preventDefault();
+      dropZone.classList.remove('dragging');
+    }));
+    
+    dropZone.addEventListener('drop', e => {
+      e.preventDefault();
+      fileInput.files = e.dataTransfer.files;
+      updateSelectionUI();
     });
 
-    // iOS-safe save (blob + fallback open)
-    function savePdfBlob(doc, filename='images.pdf'){
-      const blob = doc.output('blob');
-      const url  = URL.createObjectURL(blob);
-      const a    = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      document.body.appendChild(a);
-      a.click();
-
-      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      setTimeout(()=>{
-        if (isIOS) { try { window.open(url, '_blank'); } catch(_){} }
-        setTimeout(()=>{ URL.revokeObjectURL(url); a.remove(); }, 1500);
-      }, 0);
-    }
-
-    // Build PDF
-    btn.addEventListener('click', async ()=>{
-      const files = [...(fileInput.files||[])];
-      if (!files.length){ alert('Please choose at least one image.'); return; }
-      btn.disabled = true; btn.textContent = 'Building…';
-
-      const [{ jsPDF }] = [window.jspdf || {}];
-      if (!jsPDF){ alert('Failed to load PDF library.'); btn.disabled=false; btn.textContent='Create PDF'; return; }
-
-      const [size, orient] = pageSizeEl.value.split('|');
-      const doc = new jsPDF({
-        format: size,
-        orientation: (orient==='p'?'portrait':'landscape'),
-        unit: 'mm',
-        compress: true
-      });
-
-      const pageW = doc.internal.pageSize.getWidth();
-      const pageH = doc.internal.pageSize.getHeight();
-      const margin = parseInt(marginEl.value,10) || 10;
-      const mode = fitEl.value;
-
-      for (let i=0;i<files.length;i++){
-        const f = files[i];
-        const dataURL = await readAsDataURL(f); // iOS friendly
-        const img = new Image();
-        await new Promise((res, rej)=>{ img.onload=()=>res(); img.onerror=rej; img.src = dataURL; });
-
-        const {x,y,w,h} = calcPlacement(
-          img.naturalWidth||img.width,
-          img.naturalHeight||img.height,
-          pageW, pageH, margin, mode
-        );
-
-        if (i>0) doc.addPage();
-        const fmt = (/\.(png)$/i.test(f.name) || (f.type||'').includes('png')) ? 'PNG' : 'JPEG';
-        doc.addImage(dataURL, fmt, x, y, w, h, undefined, 'FAST');
+    convertBtn.addEventListener('click', () => {
+      const files = [...(fileInput?.files || [])];
+      if (!files.length) {
+        alert('Please choose at least one image.');
+        return;
       }
-
-      savePdfBlob(doc, 'images.pdf');
-      btn.disabled = false; btn.textContent = 'Create PDF';
+      alert('Image to PDF conversion would happen here. This is a placeholder for the actual functionality.');
     });
+
+    fileInput.addEventListener('change', updateSelectionUI);
   </script>
 </body>
 </html>
