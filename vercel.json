@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/pdf-to-image", "destination": "/", "permanent": true },
+    { "source": "/pdf-to-image.html", "destination": "/", "permanent": true },
+    { "source": "/tools/pdf-to-image", "destination": "/tools/image-to-pdf", "permanent": true },
+    { "source": "/tools/pdf-to-image.html", "destination": "/tools/image-to-pdf.html", "permanent": true },
+    { "source": "/blog", "destination": "/blog.html", "permanent": true }
+  ]
+}
